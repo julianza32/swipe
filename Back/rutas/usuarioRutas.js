@@ -22,5 +22,7 @@ api.put('/subirImagen/:id', subirImgDirectorio, UsuarioControl.subirImg);
 //Ruta para mostrar imagen usuario
 api.get('/obtenerImagen/:imageFile',UsuarioControl.mostrarArchivo);
 
+api.delete('/eliminarUsuario/:id',UsuarioControl.eliminarUsuario)
+
 //Exportar el módulo
 module.exports = api;

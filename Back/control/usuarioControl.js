@@ -139,6 +139,7 @@ function subirImg(req, res) {
     }
 }
 
+
 //Funcion mostrar archivo
 
 function mostrarArchivo(req,res){
@@ -160,6 +161,29 @@ function mostrarArchivo(req,res){
 
 }
 
+function eliminarUsuario(req,res)
+{
+    var usuarioId = req.params.id;
+
+    Usuario.findByIdAndDelete(usuarioId,(err,UsuarioEliminado)=>{
+        if(err)
+        {
+            res.status(500).send({ message: "Error en el servidor" });
+        }else{
+            if (!UsuarioEliminado) {
+                res.status(200).send({ message: "No se encontro el usuario" });
+            } else {
+                res.status(200).send({ 
+                    message: "Usuario eliminado",
+                    usuario:UsuarioEliminado 
+                });
+            }
+        }
+        
+        
+        
+    });
+}
 module.exports = {
-    regitrarUsuario, login, actulizarUsuario,subirImg, mostrarArchivo
+    regitrarUsuario, login, actulizarUsuario,subirImg, mostrarArchivo, eliminarUsuario
 }
