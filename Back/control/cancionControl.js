@@ -6,6 +6,7 @@ const path=require('path');
 function registroCancion(req,res){
     var cancion=new Cancion;
     var parametros=req.body;
+
     cancion.titulo=parametros.titulo;
     cancion.artista=parametros.artista;
     cancion.genero=parametros.genero;
@@ -13,6 +14,9 @@ function registroCancion(req,res){
     cancion.anio=parametros.anio;
     cancion.letra=parametros.letra;
     cancion.reprod=0;
+    cancion.archivo = null;
+    cancion.imagenc = null;
+
 
     //Guardar en BD
     cancion.save((err,cancionNueva)=>{
