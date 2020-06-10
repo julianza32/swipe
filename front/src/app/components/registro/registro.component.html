@@ -1,0 +1,23 @@
+<div>
+    <form #formularioRegistro="ngForm" (ngSubmit)="registrarUsuario()">
+        <div>
+            <input type="text" placeholder="Nombre" name=nombre #nombre="ngModel"
+                [(ngModel)]="usuarioRegistro.nombre"/>
+        </div>
+        <div>
+            <input type="text" placeholder="Apellido" name="apellido" #apellido="ngModel"
+                [(ngModel)]="usuarioRegistro.apellido"/>
+        </div>
+        <div>
+            <input type="email" placeholder="Correo" name="correo" #correo="ngModel"
+                [(ngModel)]="usuarioRegistro.correo"/>
+        </div>
+        <div>
+            <input type="password" placeholder="Contraseña" name="contrasena" #contrasena="ngModel"
+                [(ngModel)]="usuarioRegistro.contrasena"/>
+        </div>
+        <div>
+            <button type="submit">Registrarse</button>
+        </div>
+    </form>
+</div>
