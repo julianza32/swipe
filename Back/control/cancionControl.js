@@ -77,7 +77,7 @@ function reproducirMusica(req,res){
     //pedir el archivo a mostrar
     var archivo=req.params.musicFile;
     //ubicacion del archivo
-    var ruta='./archivos/canciones/'+archivo;
+    var ruta='./archivos/canciones/musica'+archivo;
     //validar si existe o no fs.exists('ruta,(existencia)=>')
     fs.exists(ruta,(exists)=>{
         if(exists){
@@ -135,7 +135,7 @@ function mostrarArchivoImg(req,res){
     //pedir el archivo a mostrar
     var archivo=req.params.imageFile;
     //ubicacion del archivo
-    var ruta='./archivos/canciones/'+archivo;
+    var ruta='./archivos/canciones/imag'+archivo;
     //validar si existe o no fs.exists('ruta,(existencia)=>')
     fs.exists(ruta,(exists)=>{
         if(exists){
@@ -146,11 +146,54 @@ function mostrarArchivoImg(req,res){
     });
    
 }
+
+//funcion actualizar musica
+function actualizarCancion(req,res){
+    var cancionId=req.params.id;
+    var nuevosDatosCancion=req.body;
+
+    Cancion.findByIdAndUpdate(cancionId,nuevosDatosCancion,(err,cancionActualizada)=>{
+        if(err){
+            res.status(200).send({message:"Error en el servidor"});
+        }else{
+            if(!cancionActualizada){
+                res.status(200).send({message:"No fue posible actualizar la canción"});
+            }else{
+                res.status(200).send({
+                    message:"Canción Actualizada!!",
+                    cancion:nuevosDatosCancion
+                });
+            }
+        }
+    });
+}
+//funcion eliminar musica
+function eliminarCancion(req,res){
+    var cancionId=req.params.id;
+    Cancion.findByIdAndDelete(cancionId,(err,cancionEliminada)=>{
+        if(err){
+            res.status(500).send({message: "Error en el servidor"});
+        }else{
+            if(!cancionEliminada){
+                res.status(200).send({message:"No fue posible eliminar la canción"});
+            }else{
+                res.status(200).send({
+                    message:"Cancion Eliminada",
+                    cancion:cancionEliminada
+                });
+            }
+        }
+    });
+}
+//funcion buscar cancion 
+
 //exportar 
 module.exports={
     registroCancion,
     subirCancion, 
     reproducirMusica,
     subirImgC,
-    mostrarArchivoImg
+    mostrarArchivoImg,
+    actualizarCancion,
+    eliminarCancion
 }
