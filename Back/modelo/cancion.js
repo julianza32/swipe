@@ -4,7 +4,7 @@ const Schema=mongoose.Schema;
 //Objeto
 var CancionShema= new Schema({
     titulo: String,
-    artista: String,
+    artista: [],
     genero: String,
     album: String,
     anio: Number,
@@ -16,5 +16,5 @@ var CancionShema= new Schema({
 
 });
 
-//Exportar
+//Exportar- creación de coleccion cancion
 module.exports=mongoose.model('Cancion',CancionShema);
