@@ -1,18 +1,17 @@
-const express = require('express');
-const app = express();
+const express= require('express');
+const app=express();
+//declaracion cors
+const cors=require('cors');
+//variable de rutas a ejecutar
+const usuarioRutas= require('./rutas/usuarioRutas');
+const cancionRutas= require('./rutas/cancionRutas');
 
-//Declaracion de cors (peromisos para clientes como por ejemplo angular)
-const cors= require('cors');
-//Declaracion de la constante de las rutas de usuarios
-const usuariosRutas = require('./rutas/usuarioRutas');
 
-//--Middlewars----
-app.use(express.json()); //se utiliza json para definir el tipo de archivo dque se va a aenviar por express
-app.use(cors() );
-//Consumo de las rutas 
-app.use('/api',usuariosRutas);
-//--Fin de middlewars
+//MIDLEWARES
+app.use(express.json());
+app.use(cors());
+//consumo de rutas
+app.use('/api',usuarioRutas);
+app.use('/api',cancionRutas);
 
-//Exportacion del modulo
-
-module.exports = app;
+module.exports=app;
