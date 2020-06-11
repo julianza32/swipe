@@ -164,18 +164,38 @@ function mostrarArchivo(req,res){
 function eliminarUsuario(req,res)
 {
     var usuarioId = req.params.id;
+    var ruta = './archivos/usuarios/';
 
-    Usuario.findByIdAndDelete(usuarioId,(err,UsuarioEliminado)=>{
+    //Buscar el usuario apra encontrar is tiene imagen de perfil y borrarla
+    Usuario.findOne({_id : usuarioId},(err,usuarioEncontrado)=>{
+        if(err)
+        {
+            res.status(500).send({message:"Error en el servidor"});
+        }else if(!usuarioEncontrado){
+            res.status(200).send({message:"Usuario inexistente"});
+        }else if(usuarioEncontrado.imagen !=null)
+        {
+            //borrar archivo de imagen
+            fs.unlink(ruta+usuarioEncontrado.imagen,(error)=>{
+                if (error) {
+                    res.status(200).send({message:`Error ${error}` });
+                } 
+            });
+            //fin de borrar archivo
+        }
+    });
+    
+    Usuario.findByIdAndDelete(usuarioId,(err,usuarioEliminado)=>{
         if(err)
         {
             res.status(500).send({ message: "Error en el servidor" });
         }else{
-            if (!UsuarioEliminado) {
+            if (!usuarioEliminado) {
                 res.status(200).send({ message: "No se encontro el usuario" });
             } else {
                 res.status(200).send({ 
                     message: "Usuario eliminado",
-                    usuario:UsuarioEliminado 
+                    usuario:usuarioEliminado 
                 });
             }
         }
