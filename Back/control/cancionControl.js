@@ -191,6 +191,27 @@ function eliminarCancion(req,res){
     });
 }
 //funcion buscar cancion 
+function buscarCancion(req, res){
+    var cancionId=req.params.id;
+    Cancion.findById(cancionId,(err, cancionBuscada)=>{
+        if(err){
+            res.status(500).send({message: "Error en el servidor"});
+        }else{
+            if(!cancionBuscada){
+                res.status(200).send({message:"No fue posible encontrar la canción"});
+            }else{
+                res.status(200).send({
+                    message:"Cancion encontrada",
+                    cancion:cancionBuscada
+                });
+            }
+        }
+    })
+}
+
+
+
+
 
 //exportar 
 module.exports={
@@ -200,5 +221,7 @@ module.exports={
     subirImgC,
     mostrarArchivoImg,
     actualizarCancion,
-    eliminarCancion
+    eliminarCancion, 
+    buscarCancion
+
 }
