@@ -10,7 +10,7 @@ export class CancionService {
 //variable de ruta de la api
 url='http//localhost:3000/api/';
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
   ) { }
   //servicio registrarC
   registrarC(cancionNueva){
@@ -19,7 +19,7 @@ url='http//localhost:3000/api/';
       headers: new HttpHeaders({'Content-Type':'application/json'})
     };
     return this._http.post(
-      this.url+'subir',
+      this.url +'subir',
       params,
       options
     ).pipe(map(res=>res));
