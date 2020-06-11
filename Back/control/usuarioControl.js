@@ -16,20 +16,37 @@ function regitrarUsuario(req, res) {
     usuario.contrasena = parametros.contrasena;
     usuario.rol = 'usuario';
     usuario.imagen = null;
-    usuario.save((err, usuarioNuevo) => {
+
+    Usuario.findOne({ correo: usuario.correo }, (err, usuarioLog)=>{
+        
         if (err) {
             res.status(500).send({ message: "Error en el servidor" });
         } else {
-            if (!usuarioNuevo) {
-                res.status(200).send({ message: "No fue posible crear el registro" });
-            } else {
-                res.status(200).send({
-                    message: "Usuario Creado",
-                    usuario: usuarioNuevo
+            if (!usuarioLog) {
+                //salvar usuario si no existe uno en base de datos
+                usuario.save((err, usuarioNuevo) => {
+                    if (err) {
+                        res.status(500).send({ message: "Error en el servidor" });
+                    } else {
+                        if (!usuarioNuevo) {
+                            res.status(200).send({ message: "No fue posible crear el registro" });
+                        } else {
+                            res.status(200).send({
+                                message: "Usuario Creado",
+                                usuario: usuarioNuevo
+                            });
+                        }
+                    }
                 });
+
+            }else{
+                console.log(usuarioLog);
+                res.status(200).send({message:"Este correo ya esta registrado"});
             }
         }
     });
+
+    
 
 }
 
