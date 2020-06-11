@@ -101,6 +101,8 @@ function actulizarUsuario(req, res) {
 function subirImg(req, res) {
     var usuarioId = req.params.id;
     var nombreArchivo = "No has subido ninguna imagen...";
+    var ruta = './archivos/usuarios/';
+
 
     //Validar si efectivamente se esta enviando un archivo
 
@@ -132,6 +134,25 @@ function subirImg(req, res) {
 
         if(extensionArchivo == 'png'||extensionArchivo=='jpg'||extensionArchivo=='jpeg'){
             //Actulizar del usuario el campo imagen
+
+
+             Usuario.findOne({_id: usuarioId},(err,usuarioEncontrado)=>{
+                if(err){
+                    
+                    res.status(500).send({message: "Error en el servidor"});
+                }
+                else if(usuarioEncontrado.imagen){
+                    console.log(ruta+usuarioEncontrado.imagen);
+                    
+                    //borrar archivo de imagen para actualizar
+                     fs.unlink(ruta+usuarioEncontrado.imagen, (error)=>{
+                       if(error){
+                           res.status(200).send({message:`Error ${error}` });
+                       }               
+                    }); 
+                }
+            }); 
+
 
             Usuario.findByIdAndUpdate(usuarioId,{imagen:nombreArchivo},(err,usuarioConImg)=>{
                 if(err){
