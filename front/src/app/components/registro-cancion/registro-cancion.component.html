@@ -1,0 +1,36 @@
+<div>
+    <form #formularioRegistro="ngForm" (ngSubmit)="registrarCancion()">
+<!--         <div>
+            <input type="file" placeholder="Subir imagen del albúm o canción" (change)="subirArchivoImg($event)"/>
+        </div>
+        <div>
+            <input type="file" placeholder="Subir archivo de música (mp3)" (change)="subirArchivoMusic($event)"/>
+        </div> -->
+        <div>
+            <input type="text" placeholder="Título" name=titulo #nombre="ngModel"
+                [(ngModel)]="cancionRegistrada.titulo" />
+        </div>
+        <div>
+            <input type="text" placeholder="Artista" name="artista" #artista="ngModel"
+                [(ngModel)]="cancionRegistrada.artista" />
+        </div>
+        <div>
+            <input type="text" placeholder="Genero" name="genero" #genero="ngModel"
+                [(ngModel)]="cancionRegistrada.genero" />
+        </div>
+        <div>
+            <input type="text" placeholder="Albúm" name="album" #album="ngModel" [(ngModel)]="cancionRegistrada.album" />
+        </div>
+        <div>
+            <input type="number" placeholder="Año" name="anio" #anio="ngModel" [(ngModel)]="cancionRegistrada.album" />
+        </div>
+        <div>
+            <textarea name="letra" id="letra" placeholder="Letra de la Canción" #letra="ngModel"
+                [(ngModel)]=cancionRegistrada.letra></textarea>
+        </div>
+
+        <div>
+            <button type="submit">Registrar Canción</button>
+        </div>
+    </form>
+</div>
