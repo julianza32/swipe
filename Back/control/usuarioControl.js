@@ -155,7 +155,7 @@ function mostrarArchivo(req,res){
         if(exists){
             res.sendFile(path.resolve(ruta));
         }else{
-            res.status(200)({message: "Imagen no encontrada"});
+            res.status(200).send({message: "Imagen no encontrada"});
         }
     });
 
