@@ -44,7 +44,7 @@ function subirCancion(req,res){
         //split
         var partirArchivo=rutaArchivo.split('\\');
         //Acceder a la posicion que contiene el nombre de la cancion
-        var nombreArchivo=partirArchivo[2];
+        var nombreArchivo=partirArchivo[3];
         //split
         var extensionMusica=nombreArchivo.split('\.');
         //Acceder a la posicion de extension del aarchivo
@@ -80,8 +80,9 @@ function subirCancion(req,res){
 function reproducirMusica(req,res){
     //pedir el archivo a mostrar
     var archivo=req.params.musicFile;
+    
     //ubicacion del archivo
-    var ruta='./archivos/canciones/musica'+archivo;
+    var ruta='./archivos/canciones/musica/'+archivo;
     //validar si existe o no fs.exists('ruta,(existencia)=>')
     fs.exists(ruta,(exists)=>{
         if(exists){

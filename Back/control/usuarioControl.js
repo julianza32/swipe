@@ -59,7 +59,7 @@ function login(req, res) {
 }
 
 function actulizarUsuario(req, res) {
-    //localhost:3000/api/editar/:id
+    //localhost:3000/api/actualizar/:id
     var usuarioId = req.params.id;
     var nuevosDatosUsuario = req.body;
     
