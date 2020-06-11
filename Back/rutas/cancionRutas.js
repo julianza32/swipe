@@ -20,6 +20,8 @@ api.get('/obtenerImgCancion/:imageFile', CancionControl.mostrarArchivoImg);
 api.get('/updateMusic/:id', CancionControl.actualizarCancion);
 //ruta eliminar canción
 api.get('/deleteMusic/:id', CancionControl.eliminarCancion);
+//ruta para obtener una canción en especifico
+api.get('/buscarCancion/:id', CancionControl.buscarCancion);
 
 //Exportar l RUTA
 module.exports=api;
