@@ -16,6 +16,7 @@ function regitrarUsuario(req, res) {
     usuario.contrasena = parametros.contrasena;
     usuario.rol = 'usuario';
     usuario.imagen = null;
+    usuario.lista = null;
 
     Usuario.findOne({ correo: usuario.correo }, (err, usuarioLog)=>{
         
