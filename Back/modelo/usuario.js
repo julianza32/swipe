@@ -16,6 +16,7 @@ var UsuarioSchema = new Schema({
     }]
     // telefono: Number,
     // fecha: Date
+    
 });
 
 module.exports = mongoose.model('Usuario',UsuarioSchema);

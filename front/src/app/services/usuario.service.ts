@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+//importar router
+
+
 //importar El modulo de httpClient
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -9,6 +12,7 @@ import { map } from 'rxjs/operators';
 // importar el observable
 import { Observable } from 'rxjs';
 import { JsonPipe } from '@angular/common';
+
 
 @Injectable()
 export class UsuarioService {
@@ -20,7 +24,7 @@ export class UsuarioService {
 
   //Declarar variable privada de tipo HttpClient
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
   ) { }
 
   //___________________________________
@@ -92,4 +96,17 @@ export class UsuarioService {
       formData
     ).pipe(map(res=>res));
   }
+
+  eliminarUsuario(id){ 
+    let options = {      
+      headers: new HttpHeaders( { 'Content-Type' : 'application/json' } )  
+      }  
+      
+      return this._http.delete(      
+        this.url+'eliminarUsuario/'+id,      
+        options          
+        ).pipe(map(res => res));  
+
+  }
+
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Usuario} from '../../model/usuario';
 import {UsuarioService} from '../../services/usuario.service';
 import { from } from 'rxjs';
+import {Router,ActivatedRoute, Params } from '@angular/router'
+
 @Component({
   selector: 'app-perfil-usuario',
   templateUrl: './perfil-usuario.component.html',
@@ -23,7 +25,8 @@ export class PerfilUsuarioComponent implements OnInit {
 
 
   constructor(
-    private usuarioService : UsuarioService 
+    private usuarioService : UsuarioService,
+    private _routes:Router
     ) {
       this.url= usuarioService.url
      }
@@ -75,4 +78,35 @@ export class PerfilUsuarioComponent implements OnInit {
      )
   }
 
+  cerrarCuenta(id)
+  {
+    this.usuarioService.eliminarUsuario(id).subscribe(
+      (response:any)=>{
+
+        if(response.usuario)
+        {
+          alert(response.message);
+            localStorage.removeItem('sesion');
+            this.identidad = null;
+            this._routes.navigate(['/']);
+        }else{
+          alert(response.message);
+        }
+
+      },error=>{
+        if(error!=null)
+        {
+          console.log(error);
+          
+        }
+      });
+
+  }
+
+  cerrarSesion()
+  {
+    localStorage.removeItem('sesion');
+    this.identidad = null;
+    this._routes.navigate(['/']);
+  }
 }
