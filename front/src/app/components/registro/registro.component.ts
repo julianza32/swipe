@@ -30,16 +30,24 @@ export class RegistroComponent implements OnInit {
   registrarUsuario(){
     this.usuarioService.registro(this.usuarioRegistro).subscribe(
       (response:any)=>{
-        let usuario = response.usuario;
-        this.usuarioRegistro= usuario;
-
-        if(!this.usuarioRegistro._id){
-          alert("Error al registrarse");
+        if(response.usuario)
+        {
+            let usuario = response.usuario;
+            this.usuarioRegistro= usuario;
+            
+            if(!this.usuarioRegistro._id){
+            alert("Error al registrarse");
+          }else{
+            alert (`Registro Exitoso! inicia sesion con ${this.usuarioRegistro.correo}`);
+            this.usuarioRegistro= new Usuario('','','','','','usuario','');
+            this._router.navigate(['/login']);
+          }
         }else{
-          alert (`Registro Exitoso! inicia sesion con ${this.usuarioRegistro.correo}`);
-          this.usuarioRegistro= new Usuario('','','','','','usuario','');
-          this._router.navigate(['/login']);
+          alert(response.message);
         }
+        
+
+       
       },error=>{
         var errorMensaje = <any>error;
         if(errorMensaje != null){

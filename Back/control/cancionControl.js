@@ -44,7 +44,7 @@ function subirCancion(req,res){
         //split
         var partirArchivo=rutaArchivo.split('\\');
         //Acceder a la posicion que contiene el nombre de la cancion
-        var nombreArchivo=partirArchivo[2];
+        var nombreArchivo=partirArchivo[3];
         //split
         var extensionMusica=nombreArchivo.split('\.');
         //Acceder a la posicion de extension del aarchivo
@@ -80,8 +80,9 @@ function subirCancion(req,res){
 function reproducirMusica(req,res){
     //pedir el archivo a mostrar
     var archivo=req.params.musicFile;
+    
     //ubicacion del archivo
-    var ruta='./archivos/canciones/musica'+archivo;
+    var ruta='./archivos/canciones/musica/'+archivo;
     //validar si existe o no fs.exists('ruta,(existencia)=>')
     fs.exists(ruta,(exists)=>{
         if(exists){
@@ -190,6 +191,27 @@ function eliminarCancion(req,res){
     });
 }
 //funcion buscar cancion 
+function buscarCancion(req, res){
+    var cancionId=req.params.id;
+    Cancion.findById(cancionId,(err, cancionBuscada)=>{
+        if(err){
+            res.status(500).send({message: "Error en el servidor"});
+        }else{
+            if(!cancionBuscada){
+                res.status(200).send({message:"No fue posible encontrar la canción"});
+            }else{
+                res.status(200).send({
+                    message:"Cancion encontrada",
+                    cancion:cancionBuscada
+                });
+            }
+        }
+    })
+}
+
+
+
+
 
 //exportar 
 module.exports={
@@ -199,5 +221,7 @@ module.exports={
     subirImgC,
     mostrarArchivoImg,
     actualizarCancion,
-    eliminarCancion
+    eliminarCancion, 
+    buscarCancion
+
 }
