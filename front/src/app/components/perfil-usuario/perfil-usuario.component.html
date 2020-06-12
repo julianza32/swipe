@@ -1,34 +1,80 @@
-<!-- traer la imagen de perfil de usuario -->
-    <img id="imgUsuario" [src]=rutaImagen alt="preuba"/>
+<div class="container" #contenedor>
+    <!-- traer la imagen de perfil de usuario -->
+    <div class="contenedor contenido">
+        <div class="col s12">
+            <img class="imagenPerfil col s12 m10 l6 xl6 materialboxed" id="imgUsuario" [src]=rutaImagen alt="preuba" />
 
-    <!-- <img id ="imgUsuario" src="{{url+'obtenerImagen/'}}"> -->
-    <span>Bienvenido {{identidad.nombre}} </span>
-    <!-- <span>{{rutaImagen}} </span> -->
+            <!-- <img id ="imgUsuario" src="{{url+'obtenerImagen/'}}"> -->
+            <!-- <span>Bienvenido {{identidad.nombre}} </span> -->
+            <!-- <span>{{rutaImagen}} </span> -->
 
-    <!-- Formulario de actulizacion de datos -->
-<form #formularioActulizar="ngForm" (ngSubmit)="actualizarUsuario()">
-    <div>
-        <input type="text" placeholder="Nombre" name="nombre" #nombre="ngModel"
-            [(ngModel)]="usuarioActualizar.nombre"/>
-    </div>
-    <div>
-        <input type="text" placeholder="Apellido" name="apellido" #apellido="ngModel"
-            [(ngModel)]="usuarioActualizar.apellido"/>
-    </div>
-    <div>
-        <input type="email" placeholder="Correo" name="correo" #correo="ngModel"
-            [(ngModel)]="usuarioActualizar.correo"/>
-    </div>
-    <div>
-        <input type="password" placeholder="Contraseña" name="contrasena" #contrasena="ngModel"
-            [(ngModel)]="usuarioActualizar.contrasena"/>
-    </div>
-    <div>
-        <input type="file" placeholder="Subir imagen" (change)="subirArchivo($event)"/>
-        <!-- previsualizar la imagen escogida por el usuario -->
-    </div>
-    <button type="submit">Actualizar Datos</button>
-</form>
+            <!-- Formulario de actulizacion de datos -->
+            <div class="row">
+                <form class="col s12" #formularioActulizar="ngForm" (ngSubmit)="actualizarUsuario()">
+                    <div class="row">
+                        <div class="input-field col l6 m6 s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" placeholder="Nombre" name="nombre" #nombre="ngModel"
+                                [(ngModel)]="usuarioActualizar.nombre" />
+                            <label for="nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input type="text" placeholder="Apellido" name="apellido" #apellido="ngModel"
+                                [(ngModel)]="usuarioActualizar.apellido" />
+                            <label for="apellido">Apellido</label>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">email</i>
+                        <input type="email" placeholder="Correo" name="correo" #correo="ngModel"
+                            [(ngModel)]="usuarioActualizar.correo" />
+                        <label for="correo">Correo</label>
+                    </div>
+                    <div class="input-field">
+                        <i class="material-icons prefix">vpn_key</i>
+                        <input type="password" placeholder="Contraseña" name="contrasena" #contrasena="ngModel"
+                            [(ngModel)]="usuarioActualizar.contrasena" />
+                        <label for="contrasena">Contraseña</label>
+                    </div>
+                    <div class="file-field input-field">
+                        <!-- <i class="material-icons prefix">email</i> -->
+                        <div class="btn">
+                            <span>Imagen</span>
+                            <input type="file" (change)="subirArchivo($event)">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <i class="material-icons prefix">attach_file</i>
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    <!-- previsualizar la imagen escogida por el usuario -->
 
-<button (click)="cerrarCuenta(identidad._id)">Eliminar Cuenta</button>
-<button (click)="cerrarSesion()">Cerrar Sesion</button>
+                    <button class="waves-effect waves-light btn col s12 l6 actualizar" type="submit"><i
+                            class="material-icons left">sync_alt</i>Actualizar
+                        Datos</button>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <button (click)="cerrarSesion()" class="waves-effect waves-light btn col l6 m6 s12"><i
+                            class="material-icons left">highlight_off</i>Cerrar sesion</button>
+                </div>
+            </div>
+
+            <div class="row contenedor colores">
+                <div class="col xl4 l4 m6 s12"><span>Escoje tu tema:</span></div>
+                <div class="col xl8 l8 m6 s12 ">
+                    <div class="col xl3 l3 m3 s3 temaColor t612079" (click)="cambiarTema('#612079','#dedede','15px 15px 30px #2b0e35, -15px -15px 30px #9732bd')"></div>
+                    <div class="col xl3 l3 m3 s3 temaColor tc75ac0" (click)="cambiarTema('#c75ac0','#dedede',' 15px 15px 30px #5c2958, -15px -15px 30px #ff8bff')"></div>
+                    <div class="col xl3 l3 m3 s3 temaColor tdedede" (click)="cambiarTema('#dedede','#000000','15px 15px 30px #666666, -15px -15px 30px #ffffff')"></div>
+                    <div class="col xl3 l3 m3 s3 temaColor t312f3b" (click)="cambiarTema('#312f3b','#dedede','15px 15px 30px #16151a, -15px -15px 30px #4c495c')"></div>
+                </div>
+            </div>
+            <div class="contenedor">
+                <a id="eliminar" (click)="cerrarCuenta(identidad._id)" class="waves-effect red darken-1 btn col l6 m6 s12"><i
+                        class="material-icons left">person_remove</i>Eliminar Cuenta</a>
+            </div>
+        </div>
+    </div>
+</div>
