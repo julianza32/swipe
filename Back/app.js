@@ -5,6 +5,7 @@ const cors=require('cors');
 //variable de rutas a ejecutar
 const usuarioRutas= require('./rutas/usuarioRutas');
 const cancionRutas= require('./rutas/cancionRutas');
+const listasRutas= require('./rutas/listasRutas');
 
 
 //MIDLEWARES
@@ -13,5 +14,6 @@ app.use(cors());
 //consumo de rutas
 app.use('/api',usuarioRutas);
 app.use('/api',cancionRutas);
+app.use("/api",listasRutas);
 
 module.exports=app;
