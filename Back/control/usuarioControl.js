@@ -16,20 +16,38 @@ function regitrarUsuario(req, res) {
     usuario.contrasena = parametros.contrasena;
     usuario.rol = 'usuario';
     usuario.imagen = null;
-    usuario.save((err, usuarioNuevo) => {
+    usuario.lista = null;
+
+    Usuario.findOne({ correo: usuario.correo }, (err, usuarioLog)=>{
+        
         if (err) {
             res.status(500).send({ message: "Error en el servidor" });
         } else {
-            if (!usuarioNuevo) {
-                res.status(200).send({ message: "No fue posible crear el registro" });
-            } else {
-                res.status(200).send({
-                    message: "Usuario Creado",
-                    usuario: usuarioNuevo
+            if (!usuarioLog) {
+                //salvar usuario si no existe uno en base de datos
+                usuario.save((err, usuarioNuevo) => {
+                    if (err) {
+                        res.status(500).send({ message: "Error en el servidor" });
+                    } else {
+                        if (!usuarioNuevo) {
+                            res.status(200).send({ message: "No fue posible crear el registro" });
+                        } else {
+                            res.status(200).send({
+                                message: "Usuario Creado",
+                                usuario: usuarioNuevo
+                            });
+                        }
+                    }
                 });
+
+            }else{
+                console.log(usuarioLog);
+                res.status(200).send({message:"Este correo ya esta registrado"});
             }
         }
     });
+
+    
 
 }
 
@@ -59,7 +77,7 @@ function login(req, res) {
 }
 
 function actulizarUsuario(req, res) {
-    //localhost:3000/api/editar/:id
+    //localhost:3000/api/actualizar/:id
     var usuarioId = req.params.id;
     var nuevosDatosUsuario = req.body;
     
@@ -84,6 +102,8 @@ function actulizarUsuario(req, res) {
 function subirImg(req, res) {
     var usuarioId = req.params.id;
     var nombreArchivo = "No has subido ninguna imagen...";
+    var ruta = './archivos/usuarios/';
+
 
     //Validar si efectivamente se esta enviando un archivo
 
@@ -115,6 +135,25 @@ function subirImg(req, res) {
 
         if(extensionArchivo == 'png'||extensionArchivo=='jpg'||extensionArchivo=='jpeg'){
             //Actulizar del usuario el campo imagen
+
+
+             Usuario.findOne({_id: usuarioId},(err,usuarioEncontrado)=>{
+                if(err){
+                    
+                    res.status(500).send({message: "Error en el servidor"});
+                }
+                else if(usuarioEncontrado.imagen){
+                    console.log(ruta+usuarioEncontrado.imagen);
+                    
+                    //borrar archivo de imagen para actualizar
+                     fs.unlink(ruta+usuarioEncontrado.imagen, (error)=>{
+                       if(error){
+                           res.status(200).send({message:`Error ${error}` });
+                       }               
+                    }); 
+                }
+            }); 
+
 
             Usuario.findByIdAndUpdate(usuarioId,{imagen:nombreArchivo},(err,usuarioConImg)=>{
                 if(err){
