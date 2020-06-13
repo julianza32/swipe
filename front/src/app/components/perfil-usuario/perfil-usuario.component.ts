@@ -125,6 +125,7 @@ export class PerfilUsuarioComponent implements OnInit {
     y=document.querySelectorAll(".contenido, .imagenPerfil, button");
     for (i = 0; i < y.length; i++) {
       y[i].style.boxShadow = fSombra;
+      
     }
     
     
