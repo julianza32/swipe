@@ -6,7 +6,9 @@
 }
 
 .imagenPerfil {
+    object-fit: cover;
     width: 150px;
+    height: 150px;
     border-radius: 50%;
     margin: 20px auto 10px auto;
     /* box-shadow: 10px 10px 20px #16151a, -10px -10px 20px #4c495c; */
