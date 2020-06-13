@@ -175,7 +175,7 @@ function subirImg(req, res) {
         }
     } else {
         res.status(200).send({ message: "No has subido imagen" });
-    }
+    }//
 }
 
 
