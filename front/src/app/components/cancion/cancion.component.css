@@ -22,14 +22,34 @@
     background-image: url('src/assets/img/portadaC.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 70%;
-    height: 400px;
+    background-position: center;
+    height: 50%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 23%;
+    left: 43%;
     z-index: 100;
     width: 40%;
-    padding: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.collapsible{
+    width: 100%;
+    margin: 0;
+}
+.collapsible-header{
+    background: rgba(0,0,0,0.6);
+    color: #dedede;    
+}
+.collapsible-body {
+    background: rgba(0,0,0,0.6);
+}
+.collapsible-header:focus{
+    background: rgba(0,0,0,0.6);
+    color: #dedede;
+}
+.letra{
+    max-height: 200px;
+    overflow-y: scroll;
 }
