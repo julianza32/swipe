@@ -60,7 +60,7 @@ function subirCancion(req,res){
                     res.status(500).send({message:"Error en el servidor"});
                 }else{
                     res.status(200).send({
-                        message:"Canción ahora desponible",
+                        message:"Canción ahora disponible",
                         archivo: nombreArchivo,
                         cancion: cancionArriba
                     });
@@ -96,15 +96,17 @@ function reproducirMusica(req,res){
 //Funciones para mostrar imagen de la canción
 //funcion subir imagen
 function subirImgC(req,res){
-    var usuarioId= req.params.id;
+    var cancionId= req.params.id;
     var nombreArchivo="No has subido ninguna imagen....";
+    var ruta = './archivos/canciones/imag/';
+    
     /* validar si se esta enviando archivo*/
     if(req.files){
-        var rutaArchivo= req.files.imagen.path;
+        var rutaArchivo= req.files.imagenc.path;
         //haremos split para separar elementos 
         var partirArchivo=rutaArchivo.split('\\');
         //Acceder a la posicion que contiene el nombre del archivo
-        var nombreArchivo=partirArchivo[2];
+        var nombreArchivo=partirArchivo[3];
         //split para separa nombre de archivo de la extension
         var extensionImg=nombreArchivo.split('\.');
         //Acceder a la posicion de la extensión del archivo
@@ -113,7 +115,52 @@ function subirImgC(req,res){
         console.log(`ruta: ${rutaArchivo}, particion: ${partirArchivo}, nombre Archivo: ${nombreArchivo} Extensión Archivo: ${extensionArchivo}`);
         
         //validar si el formato del archivo es aceptable
-        if(extensionArchivo=='png'|| extensionArchivo=='jpg'){
+        if(extensionArchivo=='png'|| extensionArchivo=='jpg' ||extensionArchivo=='jpeg'){
+        
+            Cancion.findOne({_id: cancionId},(err,cancionEncontrada)=>{
+                if(err){
+                    
+                    res.status(500).send({message: "Error en el servidor"});
+                }
+                else if(cancionEncontrada.imagen){
+                    console.log(ruta+cancionEncontrada.imagenc);
+                    fs.open(ruta+cancionEncontrada.imagenc,(err,data)=>{
+                        if(err)
+                        {
+                            console.log("no se encontro el archivo");
+                            //res.status(200).send({message:`Error crash ${err}` });
+                        }else if(!data)
+                        {
+                            console.log("error de lectura");
+                            //res.status(200).send({message:`Error lectura ${err}` });
+                        }else
+                        {
+                        //borrar archivo de imagen para actualizar
+                        fs.unlink(ruta+cancionEncontrada.imagenc, (error)=>{
+                        if(error){
+                            //res.status(200).send({message: });
+                            console.log(`Error ${error}`);
+                            
+                             }               
+                        }); 
+                        }
+                    });
+                    
+                }
+            }); 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             //Actualizar el campo imagen
             Cancion.findByIdAndUpdate(cancionId,{imagenc: nombreArchivo}, (err,imagenCancion)=>{
                 if(err){
@@ -140,7 +187,7 @@ function mostrarArchivoImg(req,res){
     //pedir el archivo a mostrar
     var archivo=req.params.imageFile;
     //ubicacion del archivo
-    var ruta='./archivos/canciones/imag'+archivo;
+    var ruta='./archivos/canciones/imag/'+archivo;
     //validar si existe o no fs.exists('ruta,(existencia)=>')
     fs.exists(ruta,(exists)=>{
         if(exists){
@@ -175,6 +222,33 @@ function actualizarCancion(req,res){
 //funcion eliminar musica
 function eliminarCancion(req,res){
     var cancionId=req.params.id;
+    var ruta = './archivos/canciones/imag/';
+
+    //Buscar el usuario apra encontrar is tiene imagen de perfil y borrarla
+    Cancion.findOne({_id : cancionId},(err,cancionEncontradaEliminar)=>{
+        if(err)
+        {
+            res.status(500).send({message:"Error en el servidor"});
+        }else if(!cancionEncontradaEliminar){
+            res.status(200).send({message:"Usuario inexistente"});
+        }else if(cancionEncontradaEliminar.imagenc !=null)
+        {
+            //borrar archivo de imagen
+            fs.unlink(ruta+cancionEncontradaEliminar.imagenc,(error)=>{
+                if (error) {
+                    res.status(200).send({message:`Error ${error}` });
+                } 
+            });
+            //fin de borrar archivo
+        }
+    });
+
+
+
+
+
+
+
     Cancion.findByIdAndDelete(cancionId,(err,cancionEliminada)=>{
         if(err){
             res.status(500).send({message: "Error en el servidor"});
@@ -209,7 +283,26 @@ function buscarCancion(req, res){
     })
 }
 
-
+function buscarCancionEsp(req, res){
+    var parametros = req.body;
+    var busqueda = parametros.busqueda;
+    console.log(busqueda);
+    
+    Cancion.findAll({$or: [
+            { titulo: {$regex: busqueda, $options: 'i'} } ,{ genero: {$regex: busqueda, $options: 'i'} },{ album: {$regex: busqueda, $options: 'i'} } 
+    ]}, (err, cancionEncontrada)=>{
+        //console.log(cancionEncontrada);
+        if(err){
+            res.status(500).send({message: "Error en el servidor"});
+        }else{
+            res.status(200).send({
+                message:"El resultado de tu busqueda es:",
+                cancion: cancionEncontrada
+            });
+         }
+        
+    });
+}
 
 
 
@@ -222,6 +315,7 @@ module.exports={
     mostrarArchivoImg,
     actualizarCancion,
     eliminarCancion, 
-    buscarCancion
+    buscarCancion,
+    buscarCancionEsp
 
 }
