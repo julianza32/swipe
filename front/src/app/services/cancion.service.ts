@@ -68,4 +68,9 @@ export class CancionService {
     ).pipe(map(res => res));
   }
 
+  //servicio traer todas las canciones orden asc
+  listarCanciones()
+  {
+    return this._http.get(this.url+'listarCanciones').pipe(map(res=>res));
+  }
 }

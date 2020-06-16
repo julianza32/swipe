@@ -31,11 +31,19 @@ export class AdmintabComponent implements OnInit {
   ngOnInit(): void {
     this.rutaImagenC=this.url+'obtenerImgCancion/'+this.cancionRegistrada.imagenc;
     this.rutaCancion=this.url+'playMusic/'+ this.cancionRegistrada.archivo;
+    this.ListarCanciones();
   }
 
   ListarCanciones()
   {
-    //this.listaCanciones = this.cancionService.
+    this.cancionService.listarCanciones().subscribe(
+      (response:any)=>{
+        console.log(response);
+        this.listaCanciones=response;
+      }
+    );
+    
+    
   }
 
   ProcesarFormulario()

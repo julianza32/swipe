@@ -153,19 +153,7 @@ function subirImgC(req,res){
                     
                 }
             }); 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+ 
             //Actualizar el campo imagen
             Cancion.findByIdAndUpdate(cancionId,{imagenc: nombreArchivo}, (err,imagenCancion)=>{
                 if(err){
@@ -309,7 +297,36 @@ function buscarCancionEsp(req, res){
     });
 }
 
-
+function ListarCanciones(req,res)
+{
+    Cancion.find({},{titulo:1},{sort:{titulo:1}},(err,encontrados)=>{
+        if(err)
+        {
+            res.status(500).send({message:"error en el servidor "+err});
+        }else if(!encontrados){
+            res.status(200).send({message:"No se encontraron coincidencias"});
+        }else{
+            res.status(200).send({
+                message:"datos encontrados!",
+                canciones:encontrados});
+        }
+    });
+}
+function ListarCancionesTendencia(req,res)
+{
+    Cancion.find({},{titulo:1},{sort:{reprod:-1}},(err,encontrados)=>{
+        if(err)
+        {
+            res.status(500).send({message:"error en el servidor "+err});
+        }else if(!encontrados){
+            res.status(200).send({message:"No se encontraron coincidencias"});
+        }else{
+            res.status(200).send({
+                message:"datos encontrados!",
+                canciones:encontrados});
+        }
+    });
+}
 
 //exportar 
 module.exports={
@@ -321,6 +338,8 @@ module.exports={
     actualizarCancion,
     eliminarCancion, 
     buscarCancion,
-    buscarCancionEsp
+    buscarCancionEsp,
+    ListarCanciones,
+    ListarCancionesTendencia
 
 }
