@@ -96,7 +96,7 @@ function reproducirMusica(req,res){
 //Funciones para mostrar imagen de la canción
 //funcion subir imagen
 function subirImgC(req,res){
-    var usuarioId= req.params.id;
+    var cancionId= req.params.id;
     var nombreArchivo="No has subido ninguna imagen....";
     /* validar si se esta enviando archivo*/
     if(req.files){
