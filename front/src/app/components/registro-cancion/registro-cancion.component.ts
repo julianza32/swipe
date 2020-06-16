@@ -4,6 +4,8 @@ import {Cancion} from '../../model/cancion';
 //importar servicio
 import{ CancionService} from '../../services/cancion.service';
 
+//import{Router,ActivatedRoute, Params} from '@angular/router';
+
 @Component({
   selector: 'app-registro-cancion',
   templateUrl: './registro-cancion.component.html',
@@ -15,14 +17,23 @@ export class RegistroCancionComponent implements OnInit {
   //variables tipo file
   public archivoSubirImg: File;
   public archivoSubirMusic: File;
+  //variable url
+  public url:String;
+  //variables de imagen y cancion
+  public rutaImagenC;
+  public rutaCancion;
+  
 
   constructor(
     private cancionService: CancionService
   ) { 
     this.cancionRegistrada=new Cancion('','',[],'','',0,'','',0,'');
+    this.url=cancionService.url;
   }
 
   ngOnInit(): void {
+      this.rutaImagenC=this.url+'obtenerImgCancion/'+this.cancionRegistrada.imagenc;
+      this.rutaCancion=this.url+'playMusic/'+ this.cancionRegistrada.archivo;
   }
   //metodo subir cancion 
   subirArchivoImg(fileInput:any){
@@ -41,6 +52,34 @@ export class RegistroCancionComponent implements OnInit {
         alert("Error al registrar la canción");
        }else{
          alert(`Registraste correctamente la canción ${this.cancionRegistrada.titulo} `);
+         //Validación de la carga de la imagen
+         if(!this.archivoSubirImg){
+           alert('No hay ninguna imagen');
+         }else{
+           alert(`Tu imagen para la canción ${this.cancionRegistrada.titulo} es: ${this.archivoSubirImg}`);
+           this.cancionService.cargarImagenAlbum(this.archivoSubirImg,this.cancionRegistrada._idCancion).subscribe(
+             (result:any)=>{
+               this.cancionRegistrada.imagenc=result.imagenc;
+               let rutaImagenC= this.url+'obtenerImgCancion/'+this.cancionRegistrada.imagenc;
+               console.log(rutaImagenC);
+               document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
+             }
+           );
+         }
+         //Validación de la carga de la canción
+         if(!this.archivoSubirMusic){
+           alert('No hay ninguna canción');
+         }else{
+           alert(`Haz elegido el archivo de música: ${this.archivoSubirMusic} `);
+           this.cancionService.cargarCancion(this.archivoSubirMusic,this.cancionRegistrada._idCancion).subscribe(
+             (result:any)=>{
+               this.cancionRegistrada.archivo=result.archivo;
+               let rutaCancion= this.url+'playMusic/'+this.cancionRegistrada.archivo;
+               console.log(rutaCancion);
+               document.getElementById('archivoCancion').setAttribute('src', rutaCancion );
+             }
+           );
+         }
          this.cancionRegistrada=new Cancion('','',[],'','',0,'','',0,'');
        }
       },

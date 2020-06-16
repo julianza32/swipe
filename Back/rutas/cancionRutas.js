@@ -17,9 +17,9 @@ api.put('/subirImgCancion/:id',subirImgDirectorio,CancionControl.subirImgC);
 //ruta mostrar img de canción
 api.get('/obtenerImgCancion/:imageFile', CancionControl.mostrarArchivoImg);
 //ruta actualizar cancion
-api.get('/updateMusic/:id', CancionControl.actualizarCancion);
+api.put('/updateMusic/:id', CancionControl.actualizarCancion);
 //ruta eliminar canción
-api.get('/deleteMusic/:id', CancionControl.eliminarCancion);
+api.delete('/deleteMusic/:id', CancionControl.eliminarCancion);
 
 //Exportar l RUTA
 module.exports=api;
