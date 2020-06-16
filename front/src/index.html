@@ -28,6 +28,11 @@
       var instances = M.Materialbox.init(elems);
     }
     );
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+
     function traerTema() {
       color = JSON.parse(localStorage.getItem('Tema'));
       sesion = JSON.parse(localStorage.getItem('sesion'));
