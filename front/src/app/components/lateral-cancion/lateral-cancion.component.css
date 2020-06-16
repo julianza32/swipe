@@ -1,0 +1,5 @@
+.menuLateral{
+    height: calc(100vh - 64px);
+    margin-top: 0px;
+    width: 25%;
+}

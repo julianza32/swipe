@@ -1,3 +1,5 @@
+
+
 .contenedor {
     display: flex;
     flex-direction: row;
@@ -14,15 +16,15 @@
     /* box-shadow: 10px 10px 20px #16151a, -10px -10px 20px #4c495c; */
 }
 
-.contenido {
+ .contenido {
     margin-top: 40px;
     margin-bottom: 45px;
-    /* background: #312f3b;
-    box-shadow: 15px 15px 30px #16151a, -15px -15px 30px #4c495c; */
-    /* box-shadow:  15px 30px #2b0e35, -15px -15px 30px #9732bd; */
-    padding: 10px;
+     /* background: #312f3b;
+    box-shadow: 15px 15px 30px #16151a, -15px -15px 30px #4c495c; 
+     box-shadow:  15px 30px #2b0e35, -15px -15px 30px #9732bd; 
+    padding: 10px; */
 
-}
+} 
 
 .actualizar {
     margin: 40px auto 40px;
