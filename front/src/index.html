@@ -14,6 +14,7 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
+<!-- -->
 
 <body onload="traerTema()">
   <app-root></app-root>
@@ -29,19 +30,28 @@
     );
     function traerTema() {
       color = JSON.parse(localStorage.getItem('Tema'));
-      document.getElementsByTagName('body')[0].style.background = color.fondo;
-      document.getElementsByTagName('nav')[0].style.background = color.fondo;
-      let y = document.querySelectorAll('.contenido, .imagenPerfil, button');
-      for (i = 0; i < y.length; i++) {
-        y[i].style.boxShadow = color.sombra;
+      sesion = JSON.parse(localStorage.getItem('sesion'));
+      if (sesion) {
+        if (color) {
+          document.getElementsByTagName('body')[0].style.background = color.fondo;
+        }
       }
-      let x = document.querySelectorAll(".input-field, input[type='text'], input[type='email'], input[type='password'],.contenedor, button");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.color = color.fLetra;
-        x[i].style.background = color.fondo;
-
+      else {
+        document.getElementsByTagName('body')[0].style.background = "#dedede";
       }
     }
+
+    //   //document.getElementsByTagName('nav')[0].style.background = color.fondo;
+    //   let y = document.querySelectorAll('.contenido, .imagenPerfil, button');
+    //   for (i = 0; i < y.length; i++) {
+    //     y[i].style.boxShadow = color.sombra;
+    //   }
+    //   let x = document.querySelectorAll(".input-field, input[type='text'], input[type='email'], input[type='password'],.contenedor, button");
+    //   for (i = 0; i < x.length; i++) {
+    //     x[i].style.color = color.fLetra;
+    //     x[i].style.background = color.fondo;
+    //   }
+    // }
   </script>
 </body>
 

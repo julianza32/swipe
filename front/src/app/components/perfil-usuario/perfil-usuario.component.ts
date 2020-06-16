@@ -1,9 +1,8 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { Usuario } from '../../model/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { from } from 'rxjs';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -11,10 +10,8 @@ import { Container } from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['./perfil-usuario.component.css']
 })
 
-export class PerfilUsuarioComponent implements OnInit {
-
-  @ViewChild("contenedor") contenedor: ElementRef;
-
+export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
+  @ViewChild('contenedor') contenedor;
   //Declarar la variable usuariActulizar
   public usuarioActualizar: Usuario;
   //Declaraa la variable archivoSubir de tipo File
@@ -34,12 +31,41 @@ export class PerfilUsuarioComponent implements OnInit {
   ) {
     this.url = usuarioService.url;
   }
+  ngAfterViewInit() {
 
-  ngOnInit(): void {
-    this.usuarioActualizar = JSON.parse(localStorage.getItem('sesion'));
-    this.identidad = this.usuarioService.obtenerNombreUsuario();
-    this.rutaImagen = this.url + 'obtenerImagen/' + this.usuarioActualizar.imagen;
+    let color = JSON.parse(localStorage.getItem('Tema'));
+    let i, x, y;
+
+
+    //Condicional para saber si hay un tema guadardado 
+    if (color) {
+      this.renderer.setStyle(this.contenedor.nativeElement, 'background', color.fondo);
+      this.renderer.setStyle(this.contenedor.nativeElement, 'box-shadow', color.sombra);
+
+      y = document.querySelectorAll(".contenido, .imagenPerfil, button");
+      for (i = 0; i < y.length; i++) {
+        y[i].style.boxShadow = color.sombra;
+      }
+      //traemos todos los componentes del formulario para darles el estilo
+      x = document.querySelectorAll(".input-field, input[type='text'], input[type='email'], input[type='password'], .contenedor, button");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.color = color.fLetra;
+        x[i].style.background = color.fondo;
+      }
+    } else {
+      y = document.querySelectorAll(".contenido, .imagenPerfil, button");
+      for (i = 0; i < y.length; i++) {
+        y[i].style.boxShadow = "15px 15px 30px #666666, -15px -15px 30px #ffffff";
+      }
+      //traemos todos los componentes del formulario para darles el estilo
+      x = document.querySelectorAll(".input-field, input[type='text'], input[type='email'], input[type='password'], .contenedor, button");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.color = "#312f3b";
+        x[i].style.background = "#dedede";
+      }
+    }
   }
+
 
   //medoto subirArchivo
   subirArchivo(fileInput: any) {
@@ -106,33 +132,67 @@ export class PerfilUsuarioComponent implements OnInit {
 
   cerrarSesion() {
     localStorage.removeItem('sesion');
+    //localStorage.removeItem('Tema');
     this.identidad = null;
     this._routes.navigate(['/']);
+    this.refresh()
+    // this._routes.navigate(['/']);
   }
 
   cambiarTema(fondo, fLetra, fSombra) {
-    let i,x,y;
+    let i, x, y, f;
+    //Guardamos en un objeto, los paramtros pasados por la funcion de los botones  
+
     let tema = {
       "fondo": fondo,
       "fLetra": fLetra,
       "sombra": fSombra
     }
-    localStorage.setItem('Tema',JSON.stringify(tema));
-    //this.renderer.addClass(this.contenedor.nativeElement, color);
-    document.getElementsByTagName('body')[0].style.background = tema.fondo;
+    //Guardamos el objeto en un localStorage
+    localStorage.setItem('Tema', JSON.stringify(tema));
+    //traemos el selector de la barra de menu
     document.getElementsByTagName('nav')[0].style.background = tema.fondo;
-    
-    y=document.querySelectorAll(".contenido, .imagenPerfil, button");
+
+    if (tema.fLetra === "#dedede") {
+      //traemos el logo de la barra del menu
+      document.querySelectorAll(".logo")[0].setAttribute("src", "../../assets/img/logoBlancoPrueba.png");
+    } else {
+      //traemos el logo de la barra del menu
+      document.querySelectorAll(".logo")[0].setAttribute("src", "../../assets/img/logoPrueba.png");
+    }
+    //traemos los links del menu 
+    f = document.querySelectorAll(".links");
+    for (i = 0; i < f.length; i++) {
+      f[i].style.color = tema.fLetra;
+    }
+    //traemos el selector de body para añadirle el color
+    document.getElementsByTagName('body')[0].style.background = tema.fondo;
+
+    //traemos los componentes que queremos cambiar el color y las sombras de perfil-usuario
+    y = document.querySelectorAll(".contenido, .imagenPerfil, button");
     for (i = 0; i < y.length; i++) {
       y[i].style.boxShadow = fSombra;
+      // y[i].style.background = tema.fondo;
     }
-    
-    
+    //traemos todos los componentes del formulario para darles el estilo
     x = document.querySelectorAll(".input-field, input[type='text'], input[type='email'], input[type='password'], .contenedor, button");
     for (i = 0; i < x.length; i++) {
       x[i].style.color = tema.fLetra;
       x[i].style.background = tema.fondo;
     }
-    
+
+  }
+  refresh(): void {
+    window.location.reload();
+  }
+  ngOnInit(): void {
+    let sesion = JSON.parse(localStorage.getItem('sesion'));
+    if(!sesion){
+      this._routes.navigate(['/']);
+    }
+
+    this.usuarioActualizar = JSON.parse(localStorage.getItem('sesion'));
+    this.identidad = this.usuarioService.obtenerNombreUsuario();
+    this.rutaImagen = this.url + 'obtenerImagen/' + this.usuarioActualizar.imagen;
   }
 }
