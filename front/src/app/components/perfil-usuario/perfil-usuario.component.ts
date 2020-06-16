@@ -29,7 +29,7 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
     private _routes: Router,
     private renderer: Renderer2
   ) {
-    this.url = usuarioService.url
+    this.url = usuarioService.url;
   }
   ngAfterViewInit() {
 
@@ -94,11 +94,11 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
                 //document.getElementById('mostrarImagen').setAttribute('src',rutaImagen);
                 document.getElementById('imgUsuario').setAttribute('src', rutaImagen);
               }
-            )
+            );
           }
 
         } else {
-          alert(`No se pudo actualizar los datos :(`)
+          alert(`No se pudo actualizar los datos :(`);
         }
       }, error => {
         if (error != null) {

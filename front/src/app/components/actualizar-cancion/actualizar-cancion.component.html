@@ -1,1 +1,42 @@
-<p>actualizar-cancion works!</p>
+<div>
+    <form #formularioRegistro="ngForm" (ngSubmit)="actualizarCancion()">
+        <img  id="imgCancion" [src]=rutaImagenC alt="imagen canción" />
+
+        <div>
+            <input type="file"  placeholder="Subir imagen del albúm o canción" (change)="subirArchivoImg($event)"/>
+        </div>
+        <audio id="archivoCancion" [src]=rutaCancion></audio>
+        <div>
+            <input type="file"  placeholder="Subir archivo de música (mp3)" (change)="subirArchivoMusic($event)"/>
+        </div> 
+       
+       <div>
+            <input type="text" placeholder="Título" name=titulo #titulo="ngModel"
+                [(ngModel)]="cancionActualizada.titulo" />
+        </div>
+        <div>
+            <input type="text" placeholder="Artista" name="artista" #artista="ngModel"
+                [(ngModel)]="cancionActualizada.artista" />
+        </div>
+        <button name="agregar">+</button>
+        <div>
+            <input type="text" placeholder="Genero" name="genero" #genero="ngModel"
+                [(ngModel)]="cancionActualizada.genero" />
+        </div>
+        <div>
+            <input type="text" placeholder="Albúm" name="album" #album="ngModel" [(ngModel)]="cancionActualizada.album" />
+        </div>
+        <div>
+            <input type="number" placeholder="Año" name="anio" #anio="ngModel" [(ngModel)]="cancionActualizada.anio" />
+        </div>
+        <div>
+            <textarea name="letra" id="letra" placeholder="Letra de la Canción" #letra="ngModel"
+                [(ngModel)]=cancionActualizada.letra></textarea>
+        </div>
+        
+        <div>
+            <button type="submit">Actualizar Canción</button>
+        </div>
+        <button (click)="eliminarCancion(cancionActualizada._idCancion)"></button>
+    </form>
+</div>
