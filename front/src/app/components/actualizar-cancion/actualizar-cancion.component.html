@@ -11,7 +11,7 @@
         </div> 
        
        <div>
-            <input type="text" placeholder="Título" name=titulo #titulo="ngModel"
+            <input type="text" placeholder="Título" name="titulo" #titulo="ngModel"
                 [(ngModel)]="cancionActualizada.titulo" />
         </div>
         <div>
@@ -31,12 +31,12 @@
         </div>
         <div>
             <textarea name="letra" id="letra" placeholder="Letra de la Canción" #letra="ngModel"
-                [(ngModel)]=cancionActualizada.letra></textarea>
+                [(ngModel)]="cancionActualizada.letra"></textarea>
         </div>
         
         <div>
             <button type="submit">Actualizar Canción</button>
         </div>
-        <button (click)="eliminarCancion(cancionActualizada._idCancion)"></button>
+        <button (click)="eliminarCancion(cancionActualizada._id)"></button>
     </form>
 </div>

@@ -3,7 +3,7 @@ const CancionControl=require('../control/cancionControl');
 //importar multiparty
 const multipart=require('connect-multiparty');
 const subirMusicaDirectorio=multipart({uploadDir:'./archivos/canciones/musica'});
-const subirImgDirectorio=multipart({uploadDir:'./archivos/canciones/imag'});
+const subirImgDirectorio=multipart({uploadDir:'./archivos/canciones/imagenes'});
 
 var api=express.Router();
 //ruta registro de cancion

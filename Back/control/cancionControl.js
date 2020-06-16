@@ -6,7 +6,8 @@ const path=require('path');
 function registroCancion(req,res){
     var cancion=new Cancion;
     var parametros=req.body;
-
+    console.log(parametros);
+    
     cancion.titulo=parametros.titulo;
     cancion.artista=parametros.artista;
     cancion.genero=parametros.genero;
@@ -26,7 +27,9 @@ function registroCancion(req,res){
             if(!cancionNueva){
                 res.status(200).send({message:"No fue posible subir la canción"});
             }else{
-                res.status(200).send({message:`Ahora puedes disfrutar de ${cancion.titulo}.`})
+                res.status(200).send({message:`Ahora puedes disfrutar de ${cancion.titulo}.`,
+                                     cancion:cancionNueva
+            })
             }
         }
     });
@@ -96,15 +99,17 @@ function reproducirMusica(req,res){
 //Funciones para mostrar imagen de la canción
 //funcion subir imagen
 function subirImgC(req,res){
-    var usuarioId= req.params.id;
+    var cancionId = req.params.id;
     var nombreArchivo="No has subido ninguna imagen....";
     /* validar si se esta enviando archivo*/
+    console.log(req.files);
+    
     if(req.files){
-        var rutaArchivo= req.files.imagen.path;
+        var rutaArchivo = req.files.imagenc.path;
         //haremos split para separar elementos 
         var partirArchivo=rutaArchivo.split('\\');
         //Acceder a la posicion que contiene el nombre del archivo
-        var nombreArchivo=partirArchivo[2];
+        var nombreArchivo=partirArchivo[3];
         //split para separa nombre de archivo de la extension
         var extensionImg=nombreArchivo.split('\.');
         //Acceder a la posicion de la extensión del archivo
@@ -209,7 +214,7 @@ function buscarCancion(req, res){
     })
 }
 
-
+//generos, arstistas, cancion por nombre, album buscar
 
 
 

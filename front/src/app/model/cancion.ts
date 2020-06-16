@@ -1,6 +1,6 @@
 export class Cancion{
     constructor(
-        public _idCancion: String,
+        public _id: String,
         public titulo: String,
         public artista: [],
         public genero: String,
