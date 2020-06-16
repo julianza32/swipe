@@ -11,6 +11,8 @@ import {CancionComponent} from './components/cancion/cancion.component';
 import {LateralCancionComponent} from './components/lateral-cancion/lateral-cancion.component';
 import {ControlComponent} from './components/control/control.component';
 import {RegistroCancionComponent} from './components/registro-cancion/registro-cancion.component';
+import {AdmintabComponent} from './components/admintab/admintab.component'
+
 
 
 //Importar rutas con components
@@ -23,7 +25,8 @@ const routes : Routes = [
     {path: 'lateral', component: LateralCancionComponent},
     {path: 'control',component: ControlComponent},
     {path: 'registroCancion', component: RegistroCancionComponent},
-    {path: 'actualizarCancion',component: ActualizarCancionComponent}
+    {path: 'actualizarCancion',component: ActualizarCancionComponent},
+    {path: 'admintab',component: AdmintabComponent}
 ];
 
 @NgModule({
