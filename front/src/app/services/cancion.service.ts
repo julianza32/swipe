@@ -53,7 +53,7 @@ export class CancionService {
     let formData = new FormData();
     formData.append('imagenc', file);
     return this._http.put(
-      +'subirImgCancion/' + id,
+      this.url +'subirImgCancion/' + id,
       formData
     ).pipe(map(res => res));
   }

@@ -20,7 +20,7 @@ const routes : Routes = [
     {path: 'cancion', component:CancionComponent},
     {path: 'lateral', component: LateralCancionComponent},
     {path: 'control',component: ControlComponent},
-    {path:'registroCancion', component: RegistroCancionComponent}
+    {path: 'registroCancion', component: RegistroCancionComponent}
 ];
 
 @NgModule({
