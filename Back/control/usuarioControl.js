@@ -144,13 +144,28 @@ function subirImg(req, res) {
                 }
                 else if(usuarioEncontrado.imagen){
                     console.log(ruta+usuarioEncontrado.imagen);
+                    fs.open(ruta+usuarioEncontrado.imagen,(err,data)=>{
+                        if(err)
+                        {
+                            console.log("no se encontro el archivo");
+                            //res.status(200).send({message:`Error crash ${err}` });
+                        }else if(!data)
+                        {
+                            console.log("error de lectura");
+                            //res.status(200).send({message:`Error lectura ${err}` });
+                        }else
+                        {
+                        //borrar archivo de imagen para actualizar
+                        fs.unlink(ruta+usuarioEncontrado.imagen, (error)=>{
+                        if(error){
+                            //res.status(200).send({message: });
+                            console.log(`Error ${error}`);
+                            
+                             }               
+                        }); 
+                        }
+                    });
                     
-                    //borrar archivo de imagen para actualizar
-                     fs.unlink(ruta+usuarioEncontrado.imagen, (error)=>{
-                       if(error){
-                           res.status(200).send({message:`Error ${error}` });
-                       }               
-                    }); 
                 }
             }); 
 
@@ -175,7 +190,7 @@ function subirImg(req, res) {
         }
     } else {
         res.status(200).send({ message: "No has subido imagen" });
-    }
+    }//
 }
 
 

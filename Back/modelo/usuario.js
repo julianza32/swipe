@@ -11,6 +11,7 @@ var UsuarioSchema = new Schema({
     rol: String,
     imagen: String,
     listas:[{
+        _id:false,
         nombre: String,
         canciones:[]
     }]
