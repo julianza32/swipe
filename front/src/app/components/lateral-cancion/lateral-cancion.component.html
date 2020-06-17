@@ -12,16 +12,24 @@
     <li [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
       [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
       [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
-      class="collection-item avatar">
-      <div class="row">
-        <div class="col 2">
+      class="collection-item avatar ">
+      <div class="row contenedor">
+        <div class="">
           <img id="imgCancion" class="circle responsive-img" [src]="this.url+'obtenerImgCancion/'+cancion.imagenc"
             alt="prueba">
         </div>
-        <div class="col 8">
-          <span>{{cancion.titulo}}</span>
+        <div class="">
+          <span>{{cancion.titulo}}</span><br>
           <span>{{cancion.artista}}</span>
-          <button (click)="reproCancion(cancion.archivo)"></button>
+        </div>
+        <div class="">
+          <div class="boton waves-effect waves-light play" 
+            [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+            [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+            [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
+            (click)="enviarCancion(cancion)" >
+            <i class="small material-icons">play_arrow</i>
+          </div>
         </div>
         <audio #cancion></audio>
       </div>

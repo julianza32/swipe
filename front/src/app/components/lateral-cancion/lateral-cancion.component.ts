@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { CancionService } from '../../services/cancion.service';
 import { Cancion } from '../../model/cancion';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 @Component({
   selector: 'app-lateral-cancion',
   templateUrl: './lateral-cancion.component.html',
@@ -9,16 +11,16 @@ import { Cancion } from '../../model/cancion';
 
 export class LateralCancionComponent implements OnInit, AfterViewInit {
   // variable con tipo de modelo
-  public cancionA: Cancion;
+  public _Cancion: Cancion;
   //variable tipo arreglo
-    public listaCanciones: any=[];
-    //variable de busqueda
-    public buscar: String;
-     //variable url
-  public url:String;
+  public listaCanciones: any = [];
+  //variable de busqueda
+  public buscar: String;
+  //variable url
+  public url: String;
   //variables de imagen y cancion
   public rutaImagenC;
-//variable de tipo cancion
+  //variable de tipo cancion
   public obtenerCanciones: Cancion;
 
   @ViewChild('menuLateral') menuLateral;
@@ -27,10 +29,11 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
 
 
   constructor(private renderer: Renderer2,
-    private cancionService: CancionService) {
-      this.url = cancionService.url;
-    }
-  
+    private cancionService: CancionService,
+    private _router: Router) {
+    this.url = cancionService.url;
+  }
+
 
   public sesion = JSON.parse(localStorage.getItem('sesion'));
   public color = JSON.parse(localStorage.getItem('Tema'));
@@ -68,14 +71,14 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
     // }
   }
 
-  ngOnInit(  ): void {
+  ngOnInit(): void {
     //iniciamos mostrando las canciones disponibles
     this.mostrarCanciones();
     this.color;
     // this.ngAfterViewInit();
   }
   mostrarCanciones() {
-    
+
     this.cancionService.obtenerCanciones().subscribe(
       (response: any) => {
         this.listaCanciones = response.canciones;
@@ -88,19 +91,41 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  buscarCancion(){
-    
+  buscarCancion() {
+
   }
- 
-  mostrarImag(cancionp){
-    let rutaImagenC= this.url+'obtenerImgCancion/'+cancionp.imagenc;
-    document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
+
+  mostrarImag(cancionp) {
+    let rutaImagenC = this.url + 'obtenerImgCancion/' + cancionp.imagenc;
+    document.getElementById('imgCancion').setAttribute('src', rutaImagenC);
   }
-  reproCancion(fichero){
-    let rutaCancion = this.url+'playMusic/'+fichero;
+
+
+  enviarCancion(cancion) {
+    // let fichero = cancion.archivo;
+    let infoCancion = {
+      "album": cancion.album,
+      "anio": cancion.anio,
+      "archivo": cancion.archivo,
+      "artista": cancion.artista,
+      "genero": cancion.genero,
+      "imagenc": cancion.imagenc,
+      "letra": cancion.letra,
+      "reprod": cancion.reprod + 1,
+    "titulo": cancion.titulo,
+    "_id": cancion._id
+    }
+
+     
+    localStorage.setItem('infoCancion', JSON.stringify(infoCancion));
+    //this._router.navigate(['/cancion']);
+
+
+    // let rutaCancion = this.url+'playMusic/'+fichero;
     // this.renderer.setAttribute(this.cancion.nativeElement,"src",rutaCancion);
-    this.cancion.nativeElement.src = rutaCancion;
+    // this.cancion.nativeElement.src = rutaCancion;
     
-    this.cancion.nativeElement.play();
+    // this.cancion.nativeElement.play();
   }
+
 }
