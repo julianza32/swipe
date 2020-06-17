@@ -4,11 +4,11 @@
         formulario
         <form #ActualizarCancion="ngForm" (ngSubmit)="ProcesarFormulario()">
 
-            <input placeholder="TituloCancion" type="text" name="titulo" #titulo="ngModel" [(ngModel)]="cancionRegistrada.titulo">
-            <input placeholder="Artista" type="text" name="artista" #artista="ngModel" [(ngModel)]="cancionRegistrada.artista">
-            <input placeholder="Album" type="text" name="album" #album="ngModel" [(ngModel)]="cancionRegistrada.album">
-            <input placeholder="año" type="number" name="anio" #anio="ngModel" [(ngModel)]="cancionRegistrada.anio">
-            <input placeholder="Genero" type="text" name="genero" #genero="ngModel" [(ngModel)]="cancionRegistrada.genero">
+            <input placeholder="TituloCancion" type="text" name="titulo" #titulo="ngModel" [(ngModel)]="cancionTrabajada.titulo">
+            <input placeholder="Artista" type="text" name="artista" #artista="ngModel" [(ngModel)]="cancionTrabajada.artista">
+            <input placeholder="Album" type="text" name="album" #album="ngModel" [(ngModel)]="cancionTrabajada.album">
+            <input placeholder="año" type="number" name="anio" #anio="ngModel" [(ngModel)]="cancionTrabajada.anio">
+            <input placeholder="Genero" type="text" name="genero" #genero="ngModel" [(ngModel)]="cancionTrabajada.genero">
 
             <div>
                 <input type="file"  placeholder="Subir imagen del albúm o canción" (change)="subirArchivoImg($event)"/>
@@ -25,11 +25,18 @@
     </div>
     <div>
         previsualizacion
-        <img [src]=rutaImagenC>
-        <span>{{rutaCancion}}</span>
+        <img *ngIf="cancionTrabajada.imagenc" [src]=rutaImagenC>
+        <audio #player>
+            
+        </audio>
+        <button (click)="playsong()">play</button>
+        
     </div>
-    <div>
-        Lista de canciones<br>
-        {{listaCanciones.canciones[0].titulo}}
+    Lista de canciones<br>
+    <div *ngFor="let cancion of listaCanciones.canciones" class="">
+        <span>{{cancion.titulo}}</span>
+        <button (click)="modCancion(cancion._id)">Modificar</button>
+        <button (click)="delCancion(cancion._id)">Eliminar</button>
+        
     </div>
 </div>

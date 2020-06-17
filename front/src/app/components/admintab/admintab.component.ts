@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Cancion } from '../../model/cancion';
 import { CancionService } from '../../services/cancion.service';
 
@@ -10,7 +10,9 @@ import { CancionService } from '../../services/cancion.service';
 })
 export class AdmintabComponent implements OnInit {
   
-  public cancionRegistrada: Cancion;
+  @ViewChild('player') player:ElementRef;
+
+  public cancionTrabajada: Cancion;
   public url:String;
 
   public archivoSubirImg: File;
@@ -23,17 +25,27 @@ export class AdmintabComponent implements OnInit {
 
   constructor(private cancionService:CancionService) 
   {
-    this.cancionRegistrada=new Cancion('','',[],'','',0,'','',0,'');
+    this.cancionTrabajada=new Cancion('','',[],'','',0,'','',0,'');
     
     this.url = cancionService.url;
   }
 
   ngOnInit(): void {
-    this.rutaImagenC=this.url+'obtenerImgCancion/'+this.cancionRegistrada.imagenc;
-    this.rutaCancion=this.url+'playMusic/'+ this.cancionRegistrada.archivo;
+    
     this.ListarCanciones();
   }
 
+  ngDoCheck()
+  {
+    console.log(this.rutaImagenC+","+this.cancionTrabajada.imagenc);
+    
+  }
+
+  playsong()
+  {
+    this.player.nativeElement.play();
+  }
+  
   ListarCanciones()
   {
     this.cancionService.listarCanciones().subscribe(
@@ -44,6 +56,29 @@ export class AdmintabComponent implements OnInit {
     );
     
     
+  }
+
+  modCancion(id)
+  {
+    this.cancionService.buscarCancion(id).subscribe(
+      (response:any)=>{
+        this.cancionTrabajada = response.cancion;
+        console.log(this.cancionTrabajada);
+        this.rutaImagenC=this.url+'obtenerImgCancion/'+this.cancionTrabajada.imagenc;
+        this.player.nativeElement.src = this.url+'playMusic/'+ this.cancionTrabajada.archivo;
+    });
+
+    
+    
+  }
+  delCancion(id)
+  {
+    this.cancionService.eliminarC(id).subscribe(
+      (response:any)=>{
+        alert(response.message);
+        this.listaCanciones();
+      }
+    );
   }
 
   ProcesarFormulario()
