@@ -10,7 +10,7 @@
     background-size: cover;
     filter: blur(30px);
     width: 75%;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 64px - 96px);
     display: flex;
     justify-content: center;
     align-items: center;
