@@ -13,7 +13,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-@ViewChild('Clogin') Login;  
+@ViewChild('logincont') Login;  
 @ViewChild('container') Container;  
 
   //Declarar la varible login 
@@ -46,20 +46,15 @@ export class LoginComponent implements OnInit {
   }
   
 
-
-
-
-
-
-
-
-
   ngOnInit(): void {
   }
   //-- Metodo loginUsuario que consumira el servicio iniciarSesion ---
   loginUsuario() {
+    console.log(this.login);
+    
     this.usuarioService.iniciarSesion(this.login).subscribe(
       (response: any) => {
+        console.log(response)
         let usuario = response.usuario;
         this.login = usuario;
         if(this.login){

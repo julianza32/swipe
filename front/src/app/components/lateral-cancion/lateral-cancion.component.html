@@ -1,4 +1,5 @@
-<ul #menuLateral class="menuLateral left">
+<ul #menuLateral [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+  class="menuLateral left">
   <!-- <li>
       <form #buscarForm="ngForm" (ngSubmit)="buscarCancion()">
       <input type="text" id="buscar" #buscar="ngModel" name="buscar" [(ngModel)]="">
