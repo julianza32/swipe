@@ -78,10 +78,10 @@ export class CancionService {
     return this._http.get(this.url+'listarCanciones').pipe(map(res=>res));
   }
 
-  buscarCancion(id)
+  /buscarCancion(id)
   {
     return this._http.get(this.url+'buscarCancion/'+id).pipe(map(res=>res));
-  }
+  } 
 
   filtrarCancion()
   {

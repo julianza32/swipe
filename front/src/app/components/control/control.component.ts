@@ -15,12 +15,11 @@ export class ControlComponent implements OnInit {
   //variable tipo arreglo
   public listaCanciones:any[];
   public cancionA: Cancion;
-  public url:String;
+  public urlCancion:String;
   public audioObj= new Audio();
   constructor(
     private cancionService: CancionService
-  ) { this.url=cancionService.url;
-  }
+  ) {   }
 
   ngOnInit(): void {
     this.sesion;
@@ -69,7 +68,7 @@ export class ControlComponent implements OnInit {
       //reproducir la siguiente cancion
       this.reproducirCancion(urlSig);
       //poner en localhost como canción actual
-      
+
     }
     
   }
