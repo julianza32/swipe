@@ -1,23 +1,31 @@
-<div>
+<div class=" container">
+    <h2>Registro</h2>
+    <div class="row">
     <form #formularioRegistro="ngForm" (ngSubmit)="registrarUsuario()">
-        <div>
+        
+        <div class="input-field ">
+            <i class="material-icons prefix" style="color:#312f3b;">account_circle</i>
             <input type="text" placeholder="Nombre" name=nombre #nombre="ngModel"
                 [(ngModel)]="usuarioRegistro.nombre"/>
         </div>
-        <div>
+        <div class="input-field ">
+            <i class="material-icons prefix" style="color:#312f3b;">account_circle</i>
             <input type="text" placeholder="Apellido" name="apellido" #apellido="ngModel"
                 [(ngModel)]="usuarioRegistro.apellido"/>
         </div>
-        <div>
+        <div class="input-field ">
+            <i class="material-icons prefix" style="color:#312f3b;">email</i>
             <input type="email" placeholder="Correo" name="correo" #correo="ngModel"
                 [(ngModel)]="usuarioRegistro.correo"/>
         </div>
-        <div>
+        <div class="input-field ">
+            <i class="material-icons prefix prueba" style="color:#312f3b;">vpn_key</i>
             <input type="password" placeholder="Contraseña" name="contrasena" #contrasena="ngModel"
                 [(ngModel)]="usuarioRegistro.contrasena"/>
         </div>
-        <div>
-            <button type="submit">Registrarse</button>
+        <div class="input-field ">
+            <button type="submit" class="waves-effect waves-light btn col s12 l6 registro">Registrarse</button>
         </div>
     </form>
+</div>
 </div>
