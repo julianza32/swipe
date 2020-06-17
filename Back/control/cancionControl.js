@@ -281,7 +281,7 @@ function buscarCancionEsp(req, res){
     var busqueda = parametros.busqueda;//busqueda = {busqueda:value}
     console.log(busqueda);
     
-    Cancion.findAll({$or: [
+    Cancion.find({$or: [
             { titulo: {$regex: busqueda, $options: 'i'} } ,{ genero: {$regex: busqueda, $options: 'i'} },{ album: {$regex: busqueda, $options: 'i'} } 
     ]}, (err, cancionEncontrada)=>{
         //console.log(cancionEncontrada);
@@ -327,6 +327,21 @@ function ListarCancionesTendencia(req,res)
         }
     });
 }
+function ListarCancionesGenero(req,res)
+{
+    Cancion.aggregate([{$group:{_id:"$genero"}}],(err,encontrados)=>{
+        if(err)
+        {
+            res.status(500).send({message:"error en el servidor "+err});
+        }else if(!encontrados){
+            res.status(200).send({message:"No se encontraron coincidencias"});
+        }else{
+            res.status(200).send({
+                message:"datos encontrados!",
+                canciones:encontrados});
+        }
+    });
+}
 //funcion mostrar todas las canciones disponibles
 function obtenerCanciones(req,res){
     Cancion.find((err,cancionesEncontradas)=>{
@@ -360,6 +375,7 @@ module.exports={
     buscarCancionEsp,
     ListarCanciones,
     ListarCancionesTendencia,
-    obtenerCanciones
+    obtenerCanciones,
+    ListarCancionesGenero
 
 }

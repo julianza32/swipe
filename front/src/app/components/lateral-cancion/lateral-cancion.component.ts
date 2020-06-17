@@ -16,6 +16,7 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
     public buscar: String;
      //variable url
   public url:String;
+  public urlImg:String;
   //variables de imagen y cancion
   public rutaImagenC;
 //variable de tipo cancion
@@ -29,6 +30,7 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2,
     private cancionService: CancionService) {
       this.url = cancionService.url;
+      this.urlImg = cancionService.url+'obtenerImgCancion/';
     }
   
 
@@ -88,13 +90,21 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  buscarCancion(){
+  buscarCancion(find){
     
+    let parametro = {busqueda:find};
+    this.cancionService.filtrarCancion(parametro).subscribe(
+      (respuesta:any)=>
+      {
+        console.log(respuesta);
+        this.listaCanciones = respuesta.cancion;
+      }
+    );
   }
  
   mostrarImag(cancionp){
-    let rutaImagenC= this.url+'obtenerImgCancion/'+cancionp.imagenc;
-    document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
+    //let rutaImagenC= this.url+'obtenerImgCancion/'+cancionp.imagenc;
+    //document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
   }
   reproCancion(fichero){
     let rutaCancion = this.url+'playMusic/'+fichero;
