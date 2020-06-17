@@ -15,6 +15,10 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
     public listaCanciones: any=[];
     //variable de busqueda
     public buscar: String;
+     //variable url
+  public url:String;
+  //variables de imagen y cancion
+  public rutaImagenC;
 
   @ViewChild('menuLateral') menuLateral;
   @ViewChild('collection') collection;
@@ -22,7 +26,9 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
   constructor(
     private cancionService: CancionService,
     private renderer: Renderer2
-    ) { }
+    ) {
+      this.url=cancionService.url;
+     }
 
   public sesion = JSON.parse(localStorage.getItem('sesion'));
   public color = JSON.parse(localStorage.getItem('Tema'));
@@ -65,6 +71,7 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
     this.mostrarCanciones();
   }
   mostrarCanciones() {
+    
     this.cancionService.obtenerCanciones().subscribe(
       (response: any) => {
         this.listaCanciones = response.canciones;
@@ -79,5 +86,10 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
   }
   buscarCancion(){
     
+  }
+ 
+  mostrarImag(cancionp){
+    let rutaImagenC= this.url+'obtenerImgCancion/'+cancionp.imagenc;
+    document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
   }
 }

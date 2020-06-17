@@ -1,10 +1,10 @@
 <ul #menuLateral class="menuLateral left">
   <li>
-  <!--   <form #buscarForm="ngForm" (ngSubmit)="buscarCancion()">
+    <!--   <form #buscarForm="ngForm" (ngSubmit)="buscarCancion()">
       <input type="text" id="buscar" #buscar="ngModel" name="buscar" [(ngModel)]="">
       <button type="submit"></button>
     </form> -->
-    
+
   </li>
   <ul #collection class="collection">
     <div *ngFor="let cancion of listaCanciones">
@@ -12,14 +12,22 @@
         <li class="collection-item avatar">
           <button type="submit">
             <div class="row">
-              <div class="col 4">
-                <!-- <img [src]=rutaImagen alt="prueba"> -->
+              <div class="col 2">
+                <img id="imgCancion" [src]="this.url+'obtenerImgCancion/'+cancion.imagenc" alt="prueba">
               </div>
-              <div class="col 8">
+              <div class="col 6">
                 <input class="title" type="text" id="titulo" #titulo="ngModel" name="titulo"
                   [(ngModel)]="cancion.titulo">
                 <br>
                 <input type="text" id="artista" #artista="ngModel" name="artista" [(ngModel)]="cancion.artista">
+              </div>
+              <div class="col 2">
+                <a class="dropdown-tigger btn" data-target='dropdown1'><i class="material-icons">menu</i></a>
+                <ul id='dropdown1' class='dropdown-content'>
+                  <li><a>agregar a lista</a></li>
+                  <li><a>eliminar de la lista</a></li>
+                </ul>
+               
               </div>
             </div>
           </button>
