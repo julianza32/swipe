@@ -11,6 +11,7 @@ import { CancionService } from '../../services/cancion.service';
 export class AdmintabComponent implements OnInit {
   
   @ViewChild('player') player:ElementRef;
+  @ViewChild('_id') id:ElementRef;
 
   public cancionTrabajada: Cancion;
   public url:String;
@@ -41,11 +42,19 @@ export class AdmintabComponent implements OnInit {
     
   }
 
+
+  
   playsong()
   {
     this.player.nativeElement.play();
   }
   
+  deleteId()
+  {
+    //this.id.nativeElement.value="";
+    this.cancionTrabajada=new Cancion('','',[],'','',0,'','',0,'');
+  }
+
   ListarCanciones()
   {
     this.cancionService.listarCanciones().subscribe(
@@ -83,7 +92,100 @@ export class AdmintabComponent implements OnInit {
 
   ProcesarFormulario()
   {
-
+    if(this.cancionTrabajada._id)
+    {
+      this.cancionService.actualizarC(this.cancionTrabajada,this.cancionTrabajada._id).subscribe(
+        (response:any)=>{
+          let cancionMod=response.cancion;
+          if(!cancionMod._id)
+          {
+            alert("Error al modificar cancion");
+          }else{
+            alert(`se ha modificado correctamente ${cancionMod.titulo}`);
+            if(!this.archivoSubirImg){
+              alert('No hay ninguna imagen');
+            }else{
+              alert(`Tu imagen para la canción ${cancionMod.titulo} es: ${this.archivoSubirImg.name}`);
+              console.log();
+              
+              this.cancionService.cargarImagenAlbum(this.archivoSubirImg,cancionMod._id).subscribe(
+                (result:any)=>{
+                  console.log(result);
+                  
+                  this.cancionTrabajada.imagenc=result.imagenc;
+                  let rutaImagenC= this.url+'obtenerImgCancion/'+this.cancionTrabajada.imagenc;
+                  console.log(rutaImagenC);
+                  //document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
+                }
+              );
+            }
+              
+              if(!this.archivoSubirMusic){
+                alert('No hay ninguna canción');
+              }else{
+                alert(`Haz elegido el archivo de música: ${this.archivoSubirMusic.name} `);
+                this.cancionService.cargarCancion(this.archivoSubirMusic,cancionMod._id).subscribe(
+                  (result:any)=>{
+                    this.cancionTrabajada.archivo=result.archivo;
+                    let rutaCancion= this.url+'playMusic/'+this.cancionTrabajada.archivo;
+                    console.log(rutaCancion);
+                    //document.getElementById('archivoCancion').setAttribute('src', rutaCancion );
+                  }
+                );
+              }
+          }
+ 
+          this.ListarCanciones();
+        }
+      );
+    }else{
+      this.cancionTrabajada._id='';
+      this.cancionService.registrarC(this.cancionTrabajada).subscribe(
+        (response:any)=>{
+          let newCancion=response.cancion;
+          if(!newCancion._id){
+            alert("Error al registrar la canción");
+           }else{
+             alert(`Registraste correctamente la canción ${newCancion.titulo} `);
+             //Validación de la carga de la imagen
+             if(!this.archivoSubirImg){
+               alert('No hay ninguna imagen');
+             }else{
+               alert(`Tu imagen para la canción ${newCancion.titulo} es: ${this.archivoSubirImg.name}`);
+               console.log();
+               
+               this.cancionService.cargarImagenAlbum(this.archivoSubirImg,newCancion._id).subscribe(
+                 (result:any)=>{
+                   console.log(result);
+                   
+                   this.cancionTrabajada.imagenc=result.imagenc;
+                   let rutaImagenC= this.url+'obtenerImgCancion/'+this.cancionTrabajada.imagenc;
+                   console.log(rutaImagenC);
+                   //document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
+                 }
+               );
+             }
+             //Validación de la carga de la canción
+             if(!this.archivoSubirMusic){
+               alert('No hay ninguna canción');
+             }else{
+               alert(`Haz elegido el archivo de música: ${this.archivoSubirMusic.name} `);
+               this.cancionService.cargarCancion(this.archivoSubirMusic,newCancion._id).subscribe(
+                 (result:any)=>{
+                   this.cancionTrabajada.archivo=result.archivo;
+                   let rutaCancion= this.url+'playMusic/'+this.cancionTrabajada.archivo;
+                   console.log(rutaCancion);
+                   //document.getElementById('archivoCancion').setAttribute('src', rutaCancion );
+                 }
+               );
+             }
+             this.cancionTrabajada=new Cancion('','',[],'','',0,'','',0,'');
+           }
+          this.ListarCanciones();
+        }
+      );
+    }
+    
   }
 
   subirArchivoImg(fileInput:any){
