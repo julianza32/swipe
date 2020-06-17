@@ -16,6 +16,7 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
     public buscar: String;
      //variable url
   public url:String;
+  public urlImg:String;
   //variables de imagen y cancion
   public rutaImagenC;
 //variable de tipo cancion
@@ -28,7 +29,8 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
 
   constructor(private renderer: Renderer2,
     private cancionService: CancionService) {
-      this.url = cancionService.url+'obtenerImgCancion/';
+      this.url = cancionService.url;
+      this.urlImg = cancionService.url+'obtenerImgCancion/';
     }
   
 

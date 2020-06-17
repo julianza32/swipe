@@ -26,6 +26,10 @@ export class ControlComponent implements OnInit {
     this.sesion;
     this.color;
   }
+  ngDoCheck()
+  {
+    console.log("Un Cambio");
+  }
 
   //trae la lista de canciones
   lista(){
