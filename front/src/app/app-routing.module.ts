@@ -6,10 +6,14 @@ import {RegistroComponent} from './components/registro/registro.component';
 import {LoginComponent} from './components/login/login.component';
 import {PerfilUsuarioComponent} from './components/perfil-usuario/perfil-usuario.component';
 import {InicioComponent} from './components/inicio/inicio.component';
+import {ActualizarCancionComponent} from './components/actualizar-cancion/actualizar-cancion.component';
 import {CancionComponent} from './components/cancion/cancion.component';
 import {LateralCancionComponent} from './components/lateral-cancion/lateral-cancion.component';
 import {ControlComponent} from './components/control/control.component';
 import {RegistroCancionComponent} from './components/registro-cancion/registro-cancion.component';
+import {AdmintabComponent} from './components/admintab/admintab.component'
+
+
 
 //Importar rutas con components
 const routes : Routes = [
@@ -20,7 +24,9 @@ const routes : Routes = [
     {path: 'cancion', component:CancionComponent},
     {path: 'lateral', component: LateralCancionComponent},
     {path: 'control',component: ControlComponent},
-    {path:'registroCancion', component: RegistroCancionComponent}
+    {path: 'registroCancion', component: RegistroCancionComponent},
+    {path: 'actualizarCancion',component: ActualizarCancionComponent},
+    {path: 'admintab',component: AdmintabComponent}
 ];
 
 @NgModule({

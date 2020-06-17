@@ -1,0 +1,35 @@
+<div class="container">
+    <h2>Admin tab</h2>
+    <div>
+        formulario
+        <form #ActualizarCancion="ngForm" (ngSubmit)="ProcesarFormulario()">
+
+            <input placeholder="TituloCancion" type="text" name="titulo" #titulo="ngModel" [(ngModel)]="cancionRegistrada.titulo">
+            <input placeholder="Artista" type="text" name="artista" #artista="ngModel" [(ngModel)]="cancionRegistrada.artista">
+            <input placeholder="Album" type="text" name="album" #album="ngModel" [(ngModel)]="cancionRegistrada.album">
+            <input placeholder="año" type="number" name="anio" #anio="ngModel" [(ngModel)]="cancionRegistrada.anio">
+            <input placeholder="Genero" type="text" name="genero" #genero="ngModel" [(ngModel)]="cancionRegistrada.genero">
+
+            <div>
+                <input type="file"  placeholder="Subir imagen del albúm o canción" (change)="subirArchivoImg($event)"/>
+            </div>
+            <!--audio controls>
+                <source [src]=rutaCancion>
+            </audio-->
+            <div>
+                <input type="file"  placeholder="Subir archivo de música (mp3)" (change)="subirArchivoMusic($event)"/>
+            </div> 
+        </form>
+
+        
+    </div>
+    <div>
+        previsualizacion
+        <img [src]=rutaImagenC>
+        <span>{{rutaCancion}}</span>
+    </div>
+    <div>
+        Lista de canciones<br>
+        {{listaCanciones.canciones[0].titulo}}
+    </div>
+</div>

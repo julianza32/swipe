@@ -53,7 +53,7 @@ export class CancionService {
     let formData = new FormData();
     formData.append('imagenc', file);
     return this._http.put(
-      +'subirImgCancion/' + id,
+      this.url +'subirImgCancion/' + id,
       formData
     ).pipe(map(res => res));
   }
@@ -68,4 +68,9 @@ export class CancionService {
     ).pipe(map(res => res));
   }
 
+  //servicio traer todas las canciones orden asc
+  listarCanciones()
+  {
+    return this._http.get(this.url+'listarCanciones').pipe(map(res=>res));
+  }
 }

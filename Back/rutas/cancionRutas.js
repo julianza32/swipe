@@ -2,8 +2,9 @@ const express=require('express');
 const CancionControl=require('../control/cancionControl');
 //importar multiparty
 const multipart=require('connect-multiparty');
+const cancionControl = require('../control/cancionControl');
 const subirMusicaDirectorio=multipart({uploadDir:'./archivos/canciones/musica'});
-const subirImgDirectorio=multipart({uploadDir:'./archivos/canciones/imag'});
+const subirImgDirectorio=multipart({uploadDir:'./archivos/canciones/imagenes'});
 
 var api=express.Router();
 //ruta registro de cancion
@@ -22,6 +23,12 @@ api.put('/updateMusic/:id', CancionControl.actualizarCancion);
 api.delete('/deleteMusic/:id', CancionControl.eliminarCancion);
 //ruta para obtener una canción en especifico
 api.get('/buscarCancion/:id', CancionControl.buscarCancion);
+//ruta para obtener una canción en especifico
+api.get('/buscarCancionEsp/', CancionControl.buscarCancionEsp);
+
+api.get('/listarCanciones',cancionControl.ListarCanciones);
+
+api.get('/listarTendencias',cancionControl.ListarCancionesTendencia);
 
 //Exportar l RUTA
 module.exports=api;

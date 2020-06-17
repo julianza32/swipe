@@ -48,7 +48,8 @@ export class RegistroCancionComponent implements OnInit {
        let cancion=response.cancion; 
        this.cancionRegistrada=cancion;
 
-       if(!this.cancionRegistrada._idCancion){
+      
+       if(!this.cancionRegistrada._id){
         alert("Error al registrar la canción");
        }else{
          alert(`Registraste correctamente la canción ${this.cancionRegistrada.titulo} `);
@@ -56,13 +57,17 @@ export class RegistroCancionComponent implements OnInit {
          if(!this.archivoSubirImg){
            alert('No hay ninguna imagen');
          }else{
-           alert(`Tu imagen para la canción ${this.cancionRegistrada.titulo} es: ${this.archivoSubirImg}`);
-           this.cancionService.cargarImagenAlbum(this.archivoSubirImg,this.cancionRegistrada._idCancion).subscribe(
+           alert(`Tu imagen para la canción ${this.cancionRegistrada.titulo} es: ${this.archivoSubirImg.name}`);
+           console.log();
+           
+           this.cancionService.cargarImagenAlbum(this.archivoSubirImg,this.cancionRegistrada._id).subscribe(
              (result:any)=>{
+               console.log(result);
+               
                this.cancionRegistrada.imagenc=result.imagenc;
                let rutaImagenC= this.url+'obtenerImgCancion/'+this.cancionRegistrada.imagenc;
                console.log(rutaImagenC);
-               document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
+               //document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
              }
            );
          }
@@ -70,13 +75,13 @@ export class RegistroCancionComponent implements OnInit {
          if(!this.archivoSubirMusic){
            alert('No hay ninguna canción');
          }else{
-           alert(`Haz elegido el archivo de música: ${this.archivoSubirMusic} `);
-           this.cancionService.cargarCancion(this.archivoSubirMusic,this.cancionRegistrada._idCancion).subscribe(
+           alert(`Haz elegido el archivo de música: ${this.archivoSubirMusic.name} `);
+           this.cancionService.cargarCancion(this.archivoSubirMusic,this.cancionRegistrada._id).subscribe(
              (result:any)=>{
                this.cancionRegistrada.archivo=result.archivo;
                let rutaCancion= this.url+'playMusic/'+this.cancionRegistrada.archivo;
                console.log(rutaCancion);
-               document.getElementById('archivoCancion').setAttribute('src', rutaCancion );
+               //document.getElementById('archivoCancion').setAttribute('src', rutaCancion );
              }
            );
          }

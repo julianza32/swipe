@@ -42,7 +42,7 @@ public archivoSubirImg: File;
 
   //metodo actualizarCancion
   actualizarCancion(){
-    this.cancionService.actualizarC(this.cancionActualizada,this.cancionActualizada._idCancion).subscribe(
+    this.cancionService.actualizarC(this.cancionActualizada,this.cancionActualizada._id).subscribe(
       (response: any)=>{
         if(response.cancion){
           alert ('Los datos de la canción han sido actualizados satisfactoriamente!!');
@@ -52,7 +52,7 @@ public archivoSubirImg: File;
           alert('No hay ninguna imagen');
         }else{
           alert(`Tu imagen para la canción ${this.cancionActualizada.titulo} es: ${this.archivoSubirImg}`);
-          this.cancionService.cargarImagenAlbum(this.archivoSubirImg,this.cancionActualizada._idCancion).subscribe(
+          this.cancionService.cargarImagenAlbum(this.archivoSubirImg,this.cancionActualizada._id).subscribe(
             (result:any)=>{
               this.cancionActualizada.imagenc=result.imagenc;
               let rutaImagenC= this.url+'obtenerImgCancion/'+this.cancionActualizada.imagenc;
@@ -66,7 +66,7 @@ public archivoSubirImg: File;
           alert('No hay ninguna canción');
         }else{
           alert(`Haz elegido el archivo de música: ${this.archivoSubirMusic} `);
-          this.cancionService.cargarCancion(this.archivoSubirMusic,this.cancionActualizada._idCancion).subscribe(
+          this.cancionService.cargarCancion(this.archivoSubirMusic,this.cancionActualizada._id).subscribe(
             (result:any)=>{
               this.cancionActualizada.archivo=result.archivo;
               let rutaCancion= this.url+'playMusic/'+this.cancionActualizada.archivo;
