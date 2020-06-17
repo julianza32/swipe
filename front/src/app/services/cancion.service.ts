@@ -77,6 +77,10 @@ export class CancionService {
   {
     return this._http.get(this.url+'listarCanciones').pipe(map(res=>res));
   }
+  listarGeneros()
+  {
+    return this._http.get(this.url+'obtenerCancionesGenero').pipe(map(res=>res));
+  }
 
   buscarCancion(id)
   {

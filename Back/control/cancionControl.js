@@ -327,6 +327,21 @@ function ListarCancionesTendencia(req,res)
         }
     });
 }
+function ListarCancionesGenero(req,res)
+{
+    Cancion.aggregate([{$group:{_id:"$genero"}}],(err,encontrados)=>{
+        if(err)
+        {
+            res.status(500).send({message:"error en el servidor "+err});
+        }else if(!encontrados){
+            res.status(200).send({message:"No se encontraron coincidencias"});
+        }else{
+            res.status(200).send({
+                message:"datos encontrados!",
+                canciones:encontrados});
+        }
+    });
+}
 //funcion mostrar todas las canciones disponibles
 function obtenerCanciones(req,res){
     Cancion.find((err,cancionesEncontradas)=>{
@@ -360,6 +375,7 @@ module.exports={
     buscarCancionEsp,
     ListarCanciones,
     ListarCancionesTendencia,
-    obtenerCanciones
+    obtenerCanciones,
+    ListarCancionesGenero
 
 }

@@ -32,5 +32,7 @@ api.get('/listarTendencias',cancionControl.ListarCancionesTendencia);
 //ruta para mostrar las canciones disponibles
 api.get('/obtenerCanciones', CancionControl.obtenerCanciones);
 
+api.get('/obtenerCancionesGenero',cancionControl.ListarCancionesGenero)
+
 //Exportar l RUTA
 module.exports=api;

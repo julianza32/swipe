@@ -28,7 +28,7 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
 
   constructor(private renderer: Renderer2,
     private cancionService: CancionService) {
-      this.url = cancionService.url;
+      this.url = cancionService.url+'obtenerImgCancion/';
     }
   
 
@@ -93,8 +93,8 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
   }
  
   mostrarImag(cancionp){
-    let rutaImagenC= this.url+'obtenerImgCancion/'+cancionp.imagenc;
-    document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
+    //let rutaImagenC= this.url+'obtenerImgCancion/'+cancionp.imagenc;
+    //document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
   }
   reproCancion(fichero){
     let rutaCancion = this.url+'playMusic/'+fichero;
