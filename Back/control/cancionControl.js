@@ -327,6 +327,25 @@ function ListarCancionesTendencia(req,res)
         }
     });
 }
+//funcion mostrar todas las canciones disponibles
+function obtenerCanciones(req,res){
+    Cancion.find((err,cancionesEncontradas)=>{
+        if(err){
+            res.status(500).send({message:"Error en el servidor"});
+        }else{
+            if(!cancionesEncontradas){
+                res.status(200).send({message:"No fue posible encontrar los datos"});
+            }else{
+                 res.status(200).send({
+                     message:"Canciones Encontradas",
+                     canciones:cancionesEncontradas
+                 });
+            }
+
+        }
+    });
+}
+
 
 //exportar 
 module.exports={
@@ -340,6 +359,7 @@ module.exports={
     buscarCancion,
     buscarCancionEsp,
     ListarCanciones,
-    ListarCancionesTendencia
+    ListarCancionesTendencia,
+    obtenerCanciones
 
 }
