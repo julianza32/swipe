@@ -281,7 +281,7 @@ function buscarCancionEsp(req, res){
     var busqueda = parametros.busqueda;//busqueda = {busqueda:value}
     console.log(busqueda);
     
-    Cancion.findAll({$or: [
+    Cancion.find({$or: [
             { titulo: {$regex: busqueda, $options: 'i'} } ,{ genero: {$regex: busqueda, $options: 'i'} },{ album: {$regex: busqueda, $options: 'i'} } 
     ]}, (err, cancionEncontrada)=>{
         //console.log(cancionEncontrada);
