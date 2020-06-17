@@ -18,7 +18,7 @@ import { JsonPipe } from '@angular/common';
 export class UsuarioService {
 
   //declarar la variable url de la api
-  url = 'http://localhost:3000/api/';
+  public url = 'http://localhost:3000/api/';
   //Declarar la variable identidad
   public identidad;
 

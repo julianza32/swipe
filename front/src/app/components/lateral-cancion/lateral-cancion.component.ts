@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Renderer2 } from '@angular/core';
-
-
+import {CancionService} from '../../services/cancion.service';
+import {Cancion} from '../../model/cancion';
 @Component({
   selector: 'app-lateral-cancion',
   templateUrl: './lateral-cancion.component.html',
@@ -12,12 +12,17 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
   @ViewChild('menuLateral') menuLateral;
   @ViewChild('collection') collection;
 
+  public obtenerCanciones : Cancion;
+  public url: String;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2,private cancionService: CancionService) {
+    this.url = cancionService.url;
+   }
 
   public sesion = JSON.parse(localStorage.getItem('sesion'));
   public color = JSON.parse(localStorage.getItem('Tema'));
 
+  public listaCanciones: any;
 
   ngAfterViewInit() {
     let y, i;
@@ -50,6 +55,17 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
       y[i].style.boxShadow =  this.color.sombra;
     }
   }
+}
+
+listarCanciones(){
+  this.cancionService.listarCanciones().subscribe(
+    (response:any)=>{
+      console.log(response);
+      this.listaCanciones=response;
+    }
+  );
+  
+  
 }
 
   ngOnInit(): void {
