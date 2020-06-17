@@ -29,6 +29,8 @@ api.get('/buscarCancionEsp/', CancionControl.buscarCancionEsp);
 api.get('/listarCanciones',cancionControl.ListarCanciones);
 
 api.get('/listarTendencias',cancionControl.ListarCancionesTendencia);
+//ruta para mostrar las canciones disponibles
+api.get('/obtenerCanciones', CancionControl.obtenerCanciones);
 
 //Exportar l RUTA
 module.exports=api;

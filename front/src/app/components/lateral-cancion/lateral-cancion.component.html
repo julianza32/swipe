@@ -1,7 +1,30 @@
 <ul #menuLateral class="menuLateral left">
-
+  <li>
+  <!--   <form #buscarForm="ngForm" (ngSubmit)="buscarCancion()">
+      <input type="text" id="buscar" #buscar="ngModel" name="buscar" [(ngModel)]="">
+      <button type="submit"></button>
+    </form> -->
+    
+  </li>
   <ul #collection class="collection">
-    <li class="collection-item avatar">
+    <div *ngFor="let cancion of listaCanciones">
+      <!-- <form #listaCancionForm="ngForm"> -->
+        <li class="collection-item avatar">
+            <div class="row">
+              <div class="col 4">
+                <!-- <img [src]=rutaImagen alt="prueba"> -->
+              </div>
+              <div class="col 8">2
+                <span>{{cancion.titulo}}</span>
+                <span>{{cancion.artista}}</span>
+                <button (click)="reproCancion(cancion.archivo)"></button>
+              </div>
+            </div>
+            <audio #cancion></audio>
+
+        </li>
+    </div>
+    <!-- <li class="collection-item avatar">
       <i class="material-icons circle red">play_arrow</i>
       <span class="title">Tendencias</span>
       <p>First Line <br>
@@ -29,6 +52,6 @@
       <p>First Line <br>
         Second Line
       </p>
-    </li>
+    </li> -->
   </ul>
 </ul>
