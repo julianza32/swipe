@@ -87,4 +87,12 @@ export class CancionService {
   {
 
   }
+   //servicio mostrar canciones disponibles
+   obtenerCanciones(){
+    return this._http.get(
+      this.url+'obtenerCanciones'
+    ).pipe(map(res=>res));
+  }
+
+ 
 }
