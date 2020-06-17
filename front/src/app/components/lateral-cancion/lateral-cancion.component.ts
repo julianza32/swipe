@@ -90,8 +90,16 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  buscarCancion(){
+  buscarCancion(find){
     
+    let parametro = {busqueda:find};
+    this.cancionService.filtrarCancion(parametro).subscribe(
+      (respuesta:any)=>
+      {
+        console.log(respuesta);
+        this.listaCanciones = respuesta.cancion;
+      }
+    );
   }
  
   mostrarImag(cancionp){

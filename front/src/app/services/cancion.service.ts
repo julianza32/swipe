@@ -87,9 +87,13 @@ export class CancionService {
     return this._http.get(this.url+'buscarCancion/'+id).pipe(map(res=>res));
   }
 
-  filtrarCancion()
+  filtrarCancion(busqueda)
   {
-
+    let params = JSON.stringify(busqueda);
+    let options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this._http.post(this.url+'buscarCancionEsp',params,options).pipe(map(res=>res));
   }
    //servicio mostrar canciones disponibles
    obtenerCanciones(){

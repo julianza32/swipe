@@ -24,7 +24,7 @@ api.delete('/deleteMusic/:id', CancionControl.eliminarCancion);
 //ruta para obtener una canción en especifico
 api.get('/buscarCancion/:id', CancionControl.buscarCancion);
 //ruta para obtener una canción en especifico
-api.get('/buscarCancionEsp/', CancionControl.buscarCancionEsp);
+api.post('/buscarCancionEsp/', CancionControl.buscarCancionEsp);
 
 api.get('/listarCanciones',cancionControl.ListarCanciones);
 
