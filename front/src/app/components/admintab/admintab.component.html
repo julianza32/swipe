@@ -9,7 +9,7 @@
             <input placeholder="Album" type="text" name="album" #album="ngModel" [(ngModel)]="cancionTrabajada.album">
             <input placeholder="año" type="number" name="anio" #anio="ngModel" [(ngModel)]="cancionTrabajada.anio">
             <input placeholder="Genero" type="text" name="genero" #genero="ngModel" [(ngModel)]="cancionTrabajada.genero">
-        
+            <textarea name="letra" id="letra" placeholder="Letra de la Canción" #letra="ngModel" [(ngModel)]="cancionTrabajada.letra"></textarea>
             <input type="hidden"  value="{{cancionTrabajada._id}}" #_id="ngModel" [(ngModel)]="cancionTrabajada._id">
             
             <div>
