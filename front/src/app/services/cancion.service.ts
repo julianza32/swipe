@@ -57,6 +57,10 @@ export class CancionService {
       formData
     ).pipe(map(res => res));
   }
+  obtenerImagenAlbum(file)
+  {
+    return this._http.get(this.url+'obtenerImgCancion/'+file).pipe(map(res => res));
+  }
 
   //servicio cargar cancion
   cargarCancion(file: File, id) {
@@ -73,14 +77,20 @@ export class CancionService {
   {
     return this._http.get(this.url+'listarCanciones').pipe(map(res=>res));
   }
+
+  buscarCancion(id)
+  {
+    return this._http.get(this.url+'buscarCancion/'+id).pipe(map(res=>res));
+  }
+
+  filtrarCancion()
+  {
+
+  }
    //servicio mostrar canciones disponibles
    obtenerCanciones(){
     return this._http.get(this.url+'obtenerCanciones').pipe(map(res=>res));
   }
 
-  //servicio buscar canción con cualquier parámetro
-  buscarCancion(){
-  
-  }
-
+ 
 }

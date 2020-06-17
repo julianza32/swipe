@@ -13,7 +13,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-@ViewChild('login') Login;  
+@ViewChild('Clogin') Login;  
 @ViewChild('container') Container;  
 
   //Declarar la varible login 

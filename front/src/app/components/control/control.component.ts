@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ControlComponent implements OnInit {
 
+  public sesion = JSON.parse(localStorage.getItem('sesion'));
+  public color = JSON.parse(localStorage.getItem('Tema'));
+
   constructor() { }
 
   ngOnInit(): void {
+    this.sesion;
+    this.color;
   }
 
 }

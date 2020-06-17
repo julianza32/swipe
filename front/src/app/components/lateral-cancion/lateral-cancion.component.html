@@ -1,29 +1,31 @@
 <ul #menuLateral class="menuLateral left">
-  <li>
-  <!--   <form #buscarForm="ngForm" (ngSubmit)="buscarCancion()">
+  <!-- <li>
+      <form #buscarForm="ngForm" (ngSubmit)="buscarCancion()">
       <input type="text" id="buscar" #buscar="ngModel" name="buscar" [(ngModel)]="">
       <button type="submit"></button>
-    </form> -->
-    
-  </li>
-  <ul #collection class="collection">
-    <div *ngFor="let cancion of listaCanciones">
-      <!-- <form #listaCancionForm="ngForm"> -->
-        <li class="collection-item avatar">
-            <div class="row">
-              <div class="col 4">
-                <!-- <img [src]=rutaImagen alt="prueba"> -->
-              </div>
-              <div class="col 8">2
-                <span>{{cancion.titulo}}</span>
-                <span>{{cancion.artista}}</span>
-                <button (click)="reproCancion(cancion.archivo)"></button>
-              </div>
-            </div>
-            <audio #cancion></audio>
+    </form>
 
-        </li>
-    </div>
+  </li> -->
+  <ul class="collection" *ngFor="let cancion of listaCanciones">
+
+    <li [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+      [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+      [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
+      class="collection-item avatar">
+      <div class="row">
+        <div class="col 2">
+          <img id="imgCancion" class="circle responsive-img" [src]="this.url+'obtenerImgCancion/'+cancion.imagenc"
+            alt="prueba">
+        </div>
+        <div class="col 8">
+          <span>{{cancion.titulo}}</span>
+          <span>{{cancion.artista}}</span>
+          <button (click)="reproCancion(cancion.archivo)"></button>
+        </div>
+        <audio #cancion></audio>
+      </div>
+    </li>
+
     <!-- <li class="collection-item avatar">
       <i class="material-icons circle red">play_arrow</i>
       <span class="title">Tendencias</span>

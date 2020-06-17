@@ -219,6 +219,7 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
     window.location.reload();
   }
   ngOnInit(): void {
+    console.log(this.rutaImagen);
     let sesion = JSON.parse(localStorage.getItem('sesion'));
     if (!sesion) {
       this._routes.navigate(['/']);
