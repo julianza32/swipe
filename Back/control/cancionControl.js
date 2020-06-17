@@ -101,7 +101,7 @@ function reproducirMusica(req,res){
 function subirImgC(req,res){
     var cancionId= req.params.id;
     var nombreArchivo="No has subido ninguna imagen....";
-    var ruta = './archivos/canciones/imag/';
+    var ruta = './archivos/canciones/imagenes/';
     
     /* validar si se esta enviando archivo*/
     console.log(req.files);
@@ -180,7 +180,7 @@ function mostrarArchivoImg(req,res){
     //pedir el archivo a mostrar
     var archivo=req.params.imageFile;
     //ubicacion del archivo
-    var ruta='./archivos/canciones/imag/'+archivo;
+    var ruta='./archivos/canciones/imagenes/'+archivo;
     //validar si existe o no fs.exists('ruta,(existencia)=>')
     fs.exists(ruta,(exists)=>{
         if(exists){
@@ -215,7 +215,7 @@ function actualizarCancion(req,res){
 //funcion eliminar musica
 function eliminarCancion(req,res){
     var cancionId=req.params.id;
-    var ruta = './archivos/canciones/imag/';
+    var ruta = './archivos/canciones/imagenes/';
 
     //Buscar el usuario apra encontrar is tiene imagen de perfil y borrarla
     Cancion.findOne({_id : cancionId},(err,cancionEncontradaEliminar)=>{
