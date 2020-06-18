@@ -53,7 +53,7 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
         x[i].style.background = color.fondo;
       }
     } else {
-      y = document.querySelectorAll(".contenido, .imagenPerfil, button");
+      y = document.querySelectorAll(".contenido, .imagenPerfil, button, .btn");
       for (i = 0; i < y.length; i++) {
         y[i].style.boxShadow = "15px 15px 30px #666666, -15px -15px 30px #ffffff";
       }
@@ -202,7 +202,7 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
     document.getElementsByTagName('body')[0].style.background = tema.fondo;
 
     //traemos los componentes que queremos cambiar el color y las sombras de perfil-usuario
-    y = document.querySelectorAll(".contenido, .imagenPerfil, button");
+    y = document.querySelectorAll(".contenido, .imagenPerfil, button, .btn");
     for (i = 0; i < y.length; i++) {
       y[i].style.boxShadow = fSombra;
       // y[i].style.background = tema.fondo;

@@ -1,38 +1,30 @@
 <app-lateral-cancion></app-lateral-cancion>
-<div class="contenedor">
+<div class="contenedor contenedorF" #Fondoimg>
 </div>
 <!-- [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
       [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
       [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'" -->
 
-<div class="contenedorImg ">
+<div class="contenedorImg " #fondoA>
   <!-- <img [src]="localhost:3000/api+infoCancion.imagen"> -->
   <!-- [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'" -->
   <ul class="collapsible">
     <li>
       <div class="collapsible-header"><i class="material-icons">queue_music</i>Letra</div>
       <div class="collapsible-body">
-        <p class="letra">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis corporis dicta maiores,
-          dignissimos
-          minus dolore beatae? Voluptate repudiandae harum, fugit nisi laboriosam ipsa dignissimos sapiente similique
-          placeat impedit explicabo quisquam reiciendis culpa! Odio et ipsa eos adipisci? Voluptas quidem eius earum
-          voluptates soluta cum incidunt porro laborum mollitia ducimus libero nesciunt quos consequatur, possimus
-          molestias maiores eaque itaque quisquam, sint nulla. Ipsum pariatur quasi, adipisci illum blanditiis sed ipsam
-          vel assumenda, fuga molestias, sunt dolores cum laboriosam facilis quas ducimus perferendis repudiandae nulla
-          itaque ex. Vero perferendis recusandae excepturi quasi distinctio explicabo quisquam, non aliquid amet dolor
-          eveniet ullam inventore?. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem facilis incidunt
-          laborum, culpa sequi quae a illum consequuntur doloremque odio tenetur officia ullam fuga repudiandae sed
-          praesentium sapiente illo beatae dolore aliquam corporis nesciunt eius! Voluptas, porro fugit? Odio natus
-          veritatis quam, quasi aperiam porro est consectetur voluptatem? Expedita distinctio tenetur magnam, eum
-          maiores similique ad quas et iure eveniet molestiae inventore repellendus nam quasi voluptatum illum
-          reiciendis saepe? Dolore sint omnis inventore vel praesentium dicta doloremque sapiente odio itaque distinctio
-          aliquam exercitationem, est, suscipit, nostrum sunt repudiandae repellendus repellat velit eos sit ipsa. Optio
-          ducimus maiores natus hic corrupti!</p>
+        <p #letra class="letra"></p>
       </div>
     </li>
     <li>
       <div class="collapsible-header"><i class="material-icons">featured_play_list</i>Info</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+      <div class="collapsible-body">
+        <span #album></span><br>
+        <span #anio></span><br>
+        <span #artistas></span><br>
+        <span #genero></span><br>
+        <span #titulo></span><br>
+        <audio #cancionSrc></audio>
+      </div>
     </li>
   </ul>
 </div>
