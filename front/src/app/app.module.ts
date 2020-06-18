@@ -22,6 +22,7 @@ import { CancionComponent } from './components/cancion/cancion.component';
 import { ControlComponent } from './components/control/control.component';
 import { RegistroCancionComponent } from './components/registro-cancion/registro-cancion.component';
 import { ActualizarCancionComponent } from './components/actualizar-cancion/actualizar-cancion.component';
+import { AdmintabComponent } from './components/admintab/admintab.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ActualizarCancionComponent } from './components/actualizar-cancion/actu
     CancionComponent,
     ControlComponent,
     RegistroCancionComponent,
-    ActualizarCancionComponent
+    ActualizarCancionComponent,
+    AdmintabComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule,HttpClientModule

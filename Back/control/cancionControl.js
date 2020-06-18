@@ -6,7 +6,8 @@ const path=require('path');
 function registroCancion(req,res){
     var cancion=new Cancion;
     var parametros=req.body;
-
+    console.log(parametros);
+    
     cancion.titulo=parametros.titulo;
     cancion.artista=parametros.artista;
     cancion.genero=parametros.genero;
@@ -26,7 +27,9 @@ function registroCancion(req,res){
             if(!cancionNueva){
                 res.status(200).send({message:"No fue posible subir la canción"});
             }else{
-                res.status(200).send({message:`Ahora puedes disfrutar de ${cancion.titulo}.`})
+                res.status(200).send({message:`Ahora puedes disfrutar de ${cancion.titulo}.`,
+                                     cancion:cancionNueva
+            })
             }
         }
     });
@@ -98,9 +101,11 @@ function reproducirMusica(req,res){
 function subirImgC(req,res){
     var cancionId= req.params.id;
     var nombreArchivo="No has subido ninguna imagen....";
-    var ruta = './archivos/canciones/imag/';
+    var ruta = './archivos/canciones/imagenes/';
     
     /* validar si se esta enviando archivo*/
+    console.log(req.files);
+    
     if(req.files){
         var rutaArchivo= req.files.imagenc.path;
         //haremos split para separar elementos 
@@ -148,19 +153,7 @@ function subirImgC(req,res){
                     
                 }
             }); 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+ 
             //Actualizar el campo imagen
             Cancion.findByIdAndUpdate(cancionId,{imagenc: nombreArchivo}, (err,imagenCancion)=>{
                 if(err){
@@ -187,7 +180,7 @@ function mostrarArchivoImg(req,res){
     //pedir el archivo a mostrar
     var archivo=req.params.imageFile;
     //ubicacion del archivo
-    var ruta='./archivos/canciones/imag/'+archivo;
+    var ruta='./archivos/canciones/imagenes/'+archivo;
     //validar si existe o no fs.exists('ruta,(existencia)=>')
     fs.exists(ruta,(exists)=>{
         if(exists){
@@ -222,7 +215,7 @@ function actualizarCancion(req,res){
 //funcion eliminar musica
 function eliminarCancion(req,res){
     var cancionId=req.params.id;
-    var ruta = './archivos/canciones/imag/';
+    var ruta = './archivos/canciones/imagenes/';
 
     //Buscar el usuario apra encontrar is tiene imagen de perfil y borrarla
     Cancion.findOne({_id : cancionId},(err,cancionEncontradaEliminar)=>{
@@ -285,10 +278,10 @@ function buscarCancion(req, res){
 
 function buscarCancionEsp(req, res){
     var parametros = req.body;
-    var busqueda = parametros.busqueda;
+    var busqueda = parametros.busqueda;//busqueda = {busqueda:value}
     console.log(busqueda);
     
-    Cancion.findAll({$or: [
+    Cancion.find({$or: [
             { titulo: {$regex: busqueda, $options: 'i'} } ,{ genero: {$regex: busqueda, $options: 'i'} },{ album: {$regex: busqueda, $options: 'i'} } 
     ]}, (err, cancionEncontrada)=>{
         //console.log(cancionEncontrada);
@@ -304,6 +297,69 @@ function buscarCancionEsp(req, res){
     });
 }
 
+function ListarCanciones(req,res)
+{
+    Cancion.find({},{titulo:1},{sort:{titulo:1}},(err,encontrados)=>{
+        if(err)
+        {
+            res.status(500).send({message:"error en el servidor "+err});
+        }else if(!encontrados){
+            res.status(200).send({message:"No se encontraron coincidencias"});
+        }else{
+            res.status(200).send({
+                message:"datos encontrados!",
+                canciones:encontrados});
+        }
+    });
+}
+function ListarCancionesTendencia(req,res)
+{
+    Cancion.find({},{titulo:1},{sort:{reprod:-1}},(err,encontrados)=>{
+        if(err)
+        {
+            res.status(500).send({message:"error en el servidor "+err});
+        }else if(!encontrados){
+            res.status(200).send({message:"No se encontraron coincidencias"});
+        }else{
+            res.status(200).send({
+                message:"datos encontrados!",
+                canciones:encontrados});
+        }
+    });
+}
+function ListarCancionesGenero(req,res)
+{
+    Cancion.aggregate([{$group:{_id:"$genero"}}],(err,encontrados)=>{
+        if(err)
+        {
+            res.status(500).send({message:"error en el servidor "+err});
+        }else if(!encontrados){
+            res.status(200).send({message:"No se encontraron coincidencias"});
+        }else{
+            res.status(200).send({
+                message:"datos encontrados!",
+                canciones:encontrados});
+        }
+    });
+}
+//funcion mostrar todas las canciones disponibles
+function obtenerCanciones(req,res){
+    Cancion.find((err,cancionesEncontradas)=>{
+        if(err){
+            res.status(500).send({message:"Error en el servidor"});
+        }else{
+            if(!cancionesEncontradas){
+                res.status(200).send({message:"No fue posible encontrar los datos"});
+            }else{
+                 res.status(200).send({
+                     message:"Canciones Encontradas",
+                     canciones:cancionesEncontradas
+                 });
+            }
+
+        }
+    });
+}
 
 
 //exportar 
@@ -316,6 +372,10 @@ module.exports={
     actualizarCancion,
     eliminarCancion, 
     buscarCancion,
-    buscarCancionEsp
+    buscarCancionEsp,
+    ListarCanciones,
+    ListarCancionesTendencia,
+    obtenerCanciones,
+    ListarCancionesGenero
 
 }

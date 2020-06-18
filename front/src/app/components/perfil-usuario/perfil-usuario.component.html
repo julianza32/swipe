@@ -1,3 +1,4 @@
+
 <div class="container">
     <!-- traer la imagen de perfil de usuario -->
     <div class="contenedor contenido" #contenedor>
@@ -12,7 +13,7 @@
             <div class="row">
                 <form class="col s12" #formularioActulizar="ngForm" (ngSubmit)="actualizarUsuario()">
                     <div class="row">
-                        <div class="input-field col l6 m6 s12">
+                        <div class="input-field col hl6 m6 s12">
                             <i class="material-icons prefix">account_circle</i>
                             <input type="text" placeholder="Nombre" name="nombre" #nombre="ngModel"
                                 [(ngModel)]="usuarioActualizar.nombre" />
@@ -56,7 +57,7 @@
                 </form>
             </div>
             <div class="row">
-                <div class="col s12">
+                <div class="col s12">        
                     <button (click)="cerrarSesion()" class="waves-effect waves-light btn col l6 m6 s12"><i
                             class="material-icons left">highlight_off</i>Cerrar sesion</button>
                 </div>

@@ -1,0 +1,20 @@
+h2{
+    color: #312f3b;
+    text-align: center;
+}
+.registro{
+    margin: 40px auto 40px;
+}
+
+button{
+    background-color: #312f3b;
+}.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.formulario{
+    width: 50%;
+}

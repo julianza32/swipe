@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 
 //Importar el modelo 
 import { Usuario } from '../../model/usuario'
@@ -13,6 +13,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+@ViewChild('logincont') Login;  
+@ViewChild('container') Container;  
 
   //Declarar la varible login 
   public login: Usuario;
@@ -22,17 +24,37 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private _router: Router
+    private _router: Router,
+    private renderer : Renderer2
   ) {
     this.login = new Usuario('', '', '', '', '', 'usuario', '')
   }
+
+  public sesion = JSON.parse(localStorage.getItem('sesion'));
+  public color = JSON.parse(localStorage.getItem('Tema'));
+
+  ngAfterViewInit() {
+    if (!this.sesion) {
+      this.renderer.setStyle(this.Container.nativeElement, 'background', 'rgb(222, 222, 222)');
+      this.renderer.setStyle(this.Login.nativeElement, 'color', "#312f3b");
+      this.renderer.setStyle(this.Login.nativeElement, 'box-shadow', "15px 15px 30px #666666, -15px -15px 30px #ffffff");
+      document.querySelectorAll('button')[0].style.boxShadow="15px 15px 30px #666666, -15px -15px 30px #ffffff";       
+      document.querySelectorAll('button')[0].style.color = "#312f3b";       
+      document.querySelectorAll('button')[0].style.background = "#dedede";
+    
+    }
+  }
+  
 
   ngOnInit(): void {
   }
   //-- Metodo loginUsuario que consumira el servicio iniciarSesion ---
   loginUsuario() {
+    console.log(this.login);
+    
     this.usuarioService.iniciarSesion(this.login).subscribe(
       (response: any) => {
+        console.log(response)
         let usuario = response.usuario;
         this.login = usuario;
         if(this.login){
@@ -66,4 +88,24 @@ export class LoginComponent implements OnInit {
     );
   }
   //-- Fin metodo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

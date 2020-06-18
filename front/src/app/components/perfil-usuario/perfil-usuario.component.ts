@@ -3,7 +3,7 @@ import { Usuario } from '../../model/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { from } from 'rxjs';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-perfil-usuario',
   templateUrl: './perfil-usuario.component.html',
@@ -29,7 +29,7 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
     private _routes: Router,
     private renderer: Renderer2
   ) {
-    this.url = usuarioService.url
+    this.url = usuarioService.url;
   }
   ngAfterViewInit() {
 
@@ -94,11 +94,11 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
                 //document.getElementById('mostrarImagen').setAttribute('src',rutaImagen);
                 document.getElementById('imgUsuario').setAttribute('src', rutaImagen);
               }
-            )
+            );
           }
 
         } else {
-          alert(`No se pudo actualizar los datos :(`)
+          alert(`No se pudo actualizar los datos :(`);
         }
       }, error => {
         if (error != null) {
@@ -109,25 +109,58 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
   }
 
   cerrarCuenta(id) {
-    this.usuarioService.eliminarUsuario(id).subscribe(
-      (response: any) => {
 
-        if (response.usuario) {
-          alert(response.message);
-          localStorage.removeItem('sesion');
-          this.identidad = null;
-          this._routes.navigate(['/']);
-        } else {
-          alert(response.message);
-        }
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn waves-effect waves-light red darken-1',
+        cancelButton: 'btn waves-effect waves-light light-green darken-1'
+      },
+      buttonsStyling: false
+    })
 
-      }, error => {
-        if (error != null) {
-          console.log(error);
+    swalWithBootstrapButtons.fire({
+      title: 'Estas seguro?',
+      text: "Despues tendras que crear una nueva cuenta!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, Borrarla!',
+      cancelButtonText: 'No, Cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.usuarioService.eliminarUsuario(id).subscribe(
+          (response: any) => {
 
-        }
-      });
+            if (response.usuario) {
+              swalWithBootstrapButtons.fire(
+                'Borrada!',
+                'Tu cuenta ha sido Eliminada.',
+                'success'
+              )
+              localStorage.removeItem('sesion');
+              this.identidad = null;
+              this._routes.navigate(['/']);
+            } else {
+              alert(response.message);
+            }
 
+          }, error => {
+            if (error != null) {
+              console.log(error);
+
+            }
+          });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'Tu cuenta no ha sido eliminada :)',
+          'error'
+        )
+      }
+    })
   }
 
   cerrarSesion() {
@@ -186,8 +219,9 @@ export class PerfilUsuarioComponent implements OnInit, AfterViewInit {
     window.location.reload();
   }
   ngOnInit(): void {
+    console.log(this.rutaImagen);
     let sesion = JSON.parse(localStorage.getItem('sesion'));
-    if(!sesion){
+    if (!sesion) {
       this._routes.navigate(['/']);
     }
 

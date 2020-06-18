@@ -1,75 +1,39 @@
+<app-lateral-cancion></app-lateral-cancion>
+<div class="contenedor">
+</div>
+<!-- [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+      [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+      [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'" -->
 
-
-  <div class="row ">
-      <div class="col s12 m1"></div>
-      <div class="col s12 m3">
-        <div class="card small">
-            <div class="card-image">
-              <img src="https://www.rionegro.com.ar/wp-content/uploads/2019/10/2608154w1033.jpg?w=920&h=517&resize=920,517">
-              <span class="card-title">Tendencias</span>
-            </div>
-            <div class="card-content">
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            <div class="card-action">
-              <a href="#">This is a link</a>
-            </div>
-          </div>
-    
+<div class="contenedorImg ">
+  <!-- <img [src]="localhost:3000/api+infoCancion.imagen"> -->
+  <!-- [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'" -->
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">queue_music</i>Letra</div>
+      <div class="collapsible-body">
+        <p class="letra">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis corporis dicta maiores,
+          dignissimos
+          minus dolore beatae? Voluptate repudiandae harum, fugit nisi laboriosam ipsa dignissimos sapiente similique
+          placeat impedit explicabo quisquam reiciendis culpa! Odio et ipsa eos adipisci? Voluptas quidem eius earum
+          voluptates soluta cum incidunt porro laborum mollitia ducimus libero nesciunt quos consequatur, possimus
+          molestias maiores eaque itaque quisquam, sint nulla. Ipsum pariatur quasi, adipisci illum blanditiis sed ipsam
+          vel assumenda, fuga molestias, sunt dolores cum laboriosam facilis quas ducimus perferendis repudiandae nulla
+          itaque ex. Vero perferendis recusandae excepturi quasi distinctio explicabo quisquam, non aliquid amet dolor
+          eveniet ullam inventore?. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem facilis incidunt
+          laborum, culpa sequi quae a illum consequuntur doloremque odio tenetur officia ullam fuga repudiandae sed
+          praesentium sapiente illo beatae dolore aliquam corporis nesciunt eius! Voluptas, porro fugit? Odio natus
+          veritatis quam, quasi aperiam porro est consectetur voluptatem? Expedita distinctio tenetur magnam, eum
+          maiores similique ad quas et iure eveniet molestiae inventore repellendus nam quasi voluptatum illum
+          reiciendis saepe? Dolore sint omnis inventore vel praesentium dicta doloremque sapiente odio itaque distinctio
+          aliquam exercitationem, est, suscipit, nostrum sunt repudiandae repellendus repellat velit eos sit ipsa. Optio
+          ducimus maiores natus hic corrupti!</p>
       </div>
-
-
-    <div class="col s12 m3">
-      <div class="card small">
-        <div class="card-image">
-          <img src="https://www.rionegro.com.ar/wp-content/uploads/2019/10/2608154w1033.jpg?w=920&h=517&resize=920,517">
-          <span class="card-title">Favoritos</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col s12 m3">
-        <div class="card small">
-          <div class="card-image">
-            <img src="https://www.rionegro.com.ar/wp-content/uploads/2019/10/2608154w1033.jpg?w=920&h=517&resize=920,517">
-            <span class="card-title">Recientes</span>
-          </div>
-          <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-          </div>
-        </div>
-      </div>
-
-  </div>
-
-                                        <h2>Géneros</h2>
-
-  <div class="row ">
-    <div class="col s12 m3">
-        <div class="card small">
-          <div class="card-image">
-            <img src="https://www.rionegro.com.ar/wp-content/uploads/2019/10/2608154w1033.jpg?w=920&h=517&resize=920,517">
-            <span class="card-title">Favoritos</span>
-          </div>
-          <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-          </div>
-        </div>
-      </div>
-  </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">featured_play_list</i>Info</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+  </ul>
+</div>
+<app-control></app-control>

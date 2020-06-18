@@ -1,23 +1,47 @@
-<div>
-    <form #formularioRegistro="ngForm" (ngSubmit)="registrarUsuario()">
-        <div>
-            <input type="text" placeholder="Nombre" name=nombre #nombre="ngModel"
-                [(ngModel)]="usuarioRegistro.nombre"/>
-        </div>
-        <div>
-            <input type="text" placeholder="Apellido" name="apellido" #apellido="ngModel"
-                [(ngModel)]="usuarioRegistro.apellido"/>
-        </div>
-        <div>
-            <input type="email" placeholder="Correo" name="correo" #correo="ngModel"
-                [(ngModel)]="usuarioRegistro.correo"/>
-        </div>
-        <div>
-            <input type="password" placeholder="Contraseña" name="contrasena" #contrasena="ngModel"
-                [(ngModel)]="usuarioRegistro.contrasena"/>
-        </div>
-        <div>
-            <button type="submit">Registrarse</button>
-        </div>
-    </form>
+<div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+    [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+    [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
+    class="container">
+    <h2>Registro</h2>
+    <div class="row contenedor">   
+        <form #formularioRegistro="ngForm" (ngSubmit)="registrarUsuario()" class="formulario">
+
+            <div class="input-field ">
+                <i class="material-icons prefix" style="color:#312f3b;">account_circle</i>
+                <input type="text" name=nombre id="nombre" #nombre="ngModel"
+                    [(ngModel)]="usuarioRegistro.nombre" />
+                    <label for="nombre">Nombre</label>    
+            </div>
+
+            <!-- <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="icon_prefix" type="text" class="validate">
+                <label for="icon_prefix">First Name</label>
+              </div> -->
+
+            <div class="input-field ">
+                <i class="material-icons prefix" style="color:#312f3b;">account_circle</i>
+                <input type="text" id="apellido" name="apellido" #apellido="ngModel"
+                    [(ngModel)]="usuarioRegistro.apellido"/>
+                    <label for="apellido">Apellido</label>
+            </div>
+            <div class="input-field ">
+                <i class="material-icons prefix" style="color:#312f3b;">email</i>
+                <input type="email" id="correo" name="correo" #correo="ngModel"
+                    [(ngModel)]="usuarioRegistro.correo" class="validate" />
+                    <label for="correo">Correo</label>
+            </div>
+            <div class="input-field ">
+                <i class="material-icons prefix prueba" style="color:#312f3b;">vpn_key</i>
+                <input type="password" id="contrasena" name="contrasena" #contrasena="ngModel"
+                    [(ngModel)]="usuarioRegistro.contrasena" />
+                    <label for="contrasena">Contraseña</label>
+            </div>
+            <div class="input-field ">
+                <button [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+                [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+                [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'" type="submit" class="waves-effect waves-light btn col s12 l6 registro">Registrarse</button>
+            </div>
+        </form>
+    </div>
 </div>

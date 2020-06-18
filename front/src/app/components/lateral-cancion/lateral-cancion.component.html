@@ -1,35 +1,83 @@
 
-<ul class="menuLateral left">
-    
-  <ul class="collection">
-    <li class="collection-item avatar" style="padding-right: 20px;">
+
+<ul #menuLateral [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+  class="menuLateral left">
+
+<nav>  
+  <div class="nav-wrapper"  [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"> 
+    <div class="input-field">  
+    <input id="search" type="search" (keyup)="buscarCancion($event.target.value)">
+    <label class="label-icon" for="search">
+    <i class="material-icons">search</i></label>  
+    <i class="material-icons">close</i>     
+    </div>
+  </div>  
+</nav>
+
+ 
+  <!-- <li>
+      <form #buscarForm="ngForm" (ngSubmit)="buscarCancion()">
+      <input type="text" id="buscar" #buscar="ngModel" name="buscar" [(ngModel)]="">
+      <button type="submit"></button>
+    </form>
+
+  </li> -->
+  <ul class="collection" *ngFor="let cancion of listaCanciones">
+
+    <li [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+      [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+      [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
+      class="collection-item avatar">
+      <div class="row">
+        <div class="col 2">
+          <img id="imgCancion" class="circle responsive-img" [src]="urlImg+cancion.imagenc"
+            alt="prueba">
+        </div>
+        <div class="">
+          <span>{{cancion.titulo}}</span><br>
+          <span>{{cancion.artista}}</span>
+        </div>
+        <div class="">
+          <div class="boton waves-effect waves-light play" 
+            [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
+            [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+            [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
+            (click)="enviarCancion(cancion)" >
+            <i class="small material-icons">play_arrow</i>
+          </div>
+        </div>
+        <audio #cancion></audio>
+      </div>
+    </li>
+
+    <!-- <li class="collection-item avatar">
       <i class="material-icons circle red">play_arrow</i>
       <span class="title">Tendencias</span>
       <p>First Line <br>
-         Second Line
-      </p>
-      <br>
-    </li>
-    <li class="collection-item avatar">
-        <i class="material-icons circle red">play_arrow</i>
-        <span class="title">Favoritos</span>
-      <p>First Line <br>
-         Second Line
+        Second Line
       </p>
     </li>
+
     <li class="collection-item avatar">
-        <i class="material-icons circle red">play_arrow</i>
-        <span class="title">Recientes</span>
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Favoritos</span>
       <p>First Line <br>
-         Second Line
+        Second Line
+      </p>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Recientes</span>
+      <p>First Line <br>
+        Second Line
       </p>
     </li>
     <li class="collection-item avatar">
       <i class="material-icons circle red">play_arrow</i>
       <span class="title">Generos</span>
       <p>First Line <br>
-         Second Line
+        Second Line
       </p>
-    </li>
+    </li> -->
   </ul>
 </ul>
