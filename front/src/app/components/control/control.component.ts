@@ -11,22 +11,33 @@ export class ControlComponent implements OnInit {
 
   public sesion = JSON.parse(localStorage.getItem('sesion'));
   public color = JSON.parse(localStorage.getItem('Tema'));
-
   //variable tipo arreglo
   public listaCanciones:any[];
-  public cancionA: Cancion;
-  public urlCancion:String;
+  public cancionA = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
+  public cancionB = this.cancionA.titulo;
+  public url:String;
   public audioObj= new Audio();
+
+  
   constructor(
     private cancionService: CancionService
-  ) {   }
+  ) {  
+    this.url = cancionService.url;
+   }
 
   ngOnInit(): void {
     this.sesion;
     this.color;
   }
+
   ngDoCheck()
   {
+
+    this.cancionA = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
+    if(this.cancionA.titulo != this.cancionB)
+    {
+      
+    }
     console.log("Un Cambio");
   }
 
@@ -59,23 +70,46 @@ export class ControlComponent implements OnInit {
   //pasar a la siguiente cancion
   siguiente(){
     //buscar la siguiente cancion
-    let siguiente;
+    let siguienteC:Cancion;
      for(var i=0; i<this.listaCanciones.length; i++){
        var titulo=this.listaCanciones[i].titulo;
        
       if (titulo === this.cancionA.titulo ){
-        siguiente=this.listaCanciones[i+1].archivo;
+        siguienteC=this.listaCanciones[i+1];
         break;
       }
       //obtener url 
-      let urlSig;
+      let urlSig= this.url+'playMusic/'+siguienteC.archivo;
       //reproducir la siguiente cancion
       this.reproducirCancion(urlSig);
       //poner en localhost como canción actual
-
+      localStorage.setItem('infoCancion',JSON.stringify(siguienteC));
     }
     
   }
-  
+  //pasar a la siguiente cancion
+  atras(){
+    //buscar la siguiente cancion
+    let anterior:Cancion;
+     for(var i=0; i<this.listaCanciones.length; i++){
+       var titulo=this.listaCanciones[i].titulo;
+       
+      if (titulo === this.cancionA.titulo ){
+        anterior=this.listaCanciones[i+1];
+        break;
+      }
+      //obtener url 
+      let urlAnt= this.url+'playMusic/'+anterior.archivo;
+      //reproducir la siguiente cancion
+      this.reproducirCancion(urlAnt);
+      //poner en localhost como canción actual
+      localStorage.setItem('infoCancion',JSON.stringify(anterior));
+    }
+    
+  }
 
+  prueba()
+  {
+    alert("click");
+  }
 }
