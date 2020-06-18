@@ -29,7 +29,7 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
   @ViewChild('cancion') cancion: ElementRef;
 
 
-  constructor(private renderer: Renderer2,
+  constructor(private renderer: Renderer2, private _router: Router,
     private cancionService: CancionService) {
       this.url = cancionService.url;
       this.urlImg = cancionService.url+'obtenerImgCancion/';
@@ -127,7 +127,7 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
 
      
     localStorage.setItem('infoCancion', JSON.stringify(infoCancion));
-    //this._router.navigate(['/cancion']);
+    this._router.navigate(['/cancion']);
 
 
     // let rutaCancion = this.url+'playMusic/'+fichero;
