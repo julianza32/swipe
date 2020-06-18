@@ -22,7 +22,7 @@
     <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
       [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
       [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
-      class="boton waves-effect waves-light" (click)="reproducirCancion(this.url+'playMusic/'+this.cancionA.archivo)">
+      class="boton waves-effect waves-light" (click)="play()">
       <i class="large material-icons">play_arrow</i>
     </div>
     <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"

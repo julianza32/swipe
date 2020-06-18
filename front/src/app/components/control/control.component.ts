@@ -13,32 +13,56 @@ export class ControlComponent implements OnInit {
   public color = JSON.parse(localStorage.getItem('Tema'));
   //variable tipo arreglo
   public listaCanciones:any[];
-  public cancionA = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
-  public cancionB = this.cancionA.titulo;
+  public cancionA:Cancion;/* Cancion */;
+  public cancionB:Cancion;
   public url:String;
-  public audioObj= new Audio();
+  public audioObj:any;
 
   
   constructor(
     private cancionService: CancionService
   ) {  
+    this.cancionA = new Cancion('','',[],'','',0,'','',0,'');
+    this.cancionB = this.cancionA;
     this.url = cancionService.url;
+    this.audioObj = new Audio();
    }
 
   ngOnInit(): void {
     this.sesion;
     this.color;
+
+    this.cancionB = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
+      this.audioObj.src = this.url+"playMusic/"+this.cancionB.archivo;
+      console.log(this.url+"playMusic/"+this.cancionB.archivo);
+      
+      this.audioObj.load();
+      this.audioObj.play()
+
+    //this.lista();
   }
 
   ngDoCheck()
   {
 
     this.cancionA = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
-    if(this.cancionA.titulo != this.cancionB)
+    if(this.cancionA != null)
     {
+    if(this.cancionA.titulo != this.cancionB.titulo)
+    {
+      this.cancionB = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
+      let ucancion =this.url+"playMusic/"+this.cancionB.archivo;
+      this.audioObj.src = ucancion;
+      this.audioObj.load();
+      this.audioObj.play();
+      console.log(this.cancionB);
+      console.log(this.url+"playMusic/"+this.cancionB.archivo+ "cancion en cancionb");
       
+      
+      console.log(this.audioObj.src +" cancion sonando audio" );
     }
-    console.log("Un Cambio");
+  }
+    
   }
 
   //trae la lista de canciones
@@ -58,13 +82,22 @@ export class ControlComponent implements OnInit {
   
   //carga y reproduccion de canciones 
   reproducirCancion(url){
-  this.audioObj.src=url;
-  this.audioObj.load();
-  this.audioObj.play();
+  console.log(url);
+  
+   this.audioObj.src=url;
+    this.audioObj.load();
+    /*this.audioObj.play();*/
   }
   //pausa de canciones
   pausa(){
+
     this.audioObj.pause();
+  }
+  play(){
+
+    this.audioObj.play();
+    console.log(this.audioObj.src+"play");
+    
   }
  
   //pasar a la siguiente cancion
@@ -90,7 +123,7 @@ export class ControlComponent implements OnInit {
   //pasar a la siguiente cancion
   atras(){
     //buscar la siguiente cancion
-    let anterior:Cancion;
+    let anterior:Cancion;//globales
      for(var i=0; i<this.listaCanciones.length; i++){
        var titulo=this.listaCanciones[i].titulo;
        
@@ -108,8 +141,4 @@ export class ControlComponent implements OnInit {
     
   }
 
-  prueba()
-  {
-    alert("click");
-  }
 }
