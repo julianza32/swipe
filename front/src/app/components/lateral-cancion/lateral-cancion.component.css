@@ -4,6 +4,7 @@
     width: 25%;
     z-index: 1000;
     margin-bottom: 0;
+    overflow-y: scroll;
 }
 .collection{
     border: none;
