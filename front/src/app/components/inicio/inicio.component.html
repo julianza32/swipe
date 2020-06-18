@@ -293,24 +293,25 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row" *ngFor="let genero of ListaGenero">
-        <div class="col s12 m3" >
-            <div class="card small">
-                <div class="card-image">
-                    <img
-                        src="../../../assets/img/vallenato.jpg">
-                    <span class="card-title">{{genero._id}}</span>
-                </div>
-                <div class="card-content">
-                    <p>En esta lista podrás escuchar las canciones de los artistas mas sonados de Vallenato.</p>
-                </div>
-                <div class="card-action">
-                    <a href="#">Vallenato</a>
+        <div *ngFor="let genero of ListaGenero">
+            <div class="col xl4 l4 m6 s12" >
+                <div class="card small">
+                    <div class="card-image">
+                        <img
+                            src="../../../assets/img/vallenato.jpg">
+                        <span class="card-title">{{genero._id}}</span>
+                    </div>
+                    <div class="card-content">
+                        <p>En esta lista podrás escuchar las canciones de los artistas mas sonados de Vallenato.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Vallenato</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
+            </div>
+    </div>
+    
 </div>
 
 <app-control></app-control>

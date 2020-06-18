@@ -42,7 +42,7 @@ export class CancionComponent implements OnInit, AfterViewInit {
     this.letra.nativeElement.textContent = this.infoCancion.letra;
     this.album.nativeElement.textContent = "Album: " + this.infoCancion.album;
     this.anio.nativeElement.textContent = "Año: " + this.infoCancion.anio;
-    this.artistas.nativeElement.textContent = "Artistas: " + this.infoCancion.artistas;
+    this.artistas.nativeElement.textContent = "Artistas: " + this.infoCancion.artista[0]; 
     this.genero.nativeElement.textContent = "Genero: " + this.infoCancion.genero;
     this.titulo.nativeElement.textContent = "Titulo: " + this.infoCancion.titulo;
     //this.cancionSrc.nativeElement.src = this.rutaCancion;
@@ -78,7 +78,7 @@ export class CancionComponent implements OnInit, AfterViewInit {
       this.letra.nativeElement.textContent = this.infoCancion.letra;
       this.album.nativeElement.textContent = "Album: " + this.infoCancion.album;
       this.anio.nativeElement.textContent = "Año: " + this.infoCancion.anio;
-      this.artistas.nativeElement.textContent = "Artistas: " + this.infoCancion.artistas;
+      this.artistas.nativeElement.textContent = "Artistas: " + this.infoCancion.artista[0];
       this.genero.nativeElement.textContent = "Genero: " + this.infoCancion.genero;
       this.titulo.nativeElement.textContent = "Titulo: " + this.infoCancion.titulo;
       //this.cancionSrc.nativeElement.src = this.rutaCancion;

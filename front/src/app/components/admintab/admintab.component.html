@@ -7,33 +7,36 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">music_note</i>
-                    <input id="icon_prefix" type="text" class="validate" name="titulo" #titulo="ngModel" [(ngModel)]="cancionTrabajada.titulo">
-                    <label for="icon_prefix">Titulo</label>    
+                    <input [style.color]="'rgb(222,222,222)'" id="icon_prefix" type="text" class="validate" name="titulo" #titulo="ngModel" [(ngModel)]="cancionTrabajada.titulo">
+                    
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix">account_circle</i>
-                    <input id="icon_prefix" type="text" class="validate" name="artista" #artista="ngModel" [(ngModel)]="cancionTrabajada.artista">
-                    <label for="icon_prefix">Artista</label>           
+                    <input [style.color]="'rgb(222,222,222)'" id="icon_prefix" type="text" class="validate" name="artista" #artista="ngModel" [(ngModel)]="cancionTrabajada.artista">
+                             
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">library_music</i>
-                    <input id="icon_prefix" type="text" class="validate" name="album" #album="ngModel" [(ngModel)]="cancionTrabajada.album">
-                    <label for="icon_prefix">Album</label>    
+                    <input [style.color]="'rgb(222,222,222)'" id="icon_prefix" type="text" class="validate" name="album" #album="ngModel" [(ngModel)]="cancionTrabajada.album">
+                     
                 </div>
                 <div class="input-field col s6">
                     <i class="material-icons prefix">today</i>
-                    <input id="icon_prefix" type="text" class="validate" name="anio" #anio="ngModel" [(ngModel)]="cancionTrabajada.anio" >
-                    <label for="icon_prefix">Año</label>           
+                    <input [style.color]="'rgb(222,222,222)'" id="icon_prefix" type="text" class="validate" name="anio" #anio="ngModel" [(ngModel)]="cancionTrabajada.anio" >
+                               
                 </div>
                 
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">playlist_play</i>
-                    <input id="icon_prefix" type="text" class="validate" name="genero" #genero="ngModel" [(ngModel)]="cancionTrabajada.genero">
-                    <label for="icon_prefix">Genero</label>    
+                    <input [style.color]="'rgb(222,222,222)'" id="icon_prefix" type="text" class="validate" name="genero" #genero="ngModel" [(ngModel)]="cancionTrabajada.genero">
+                       
+                </div>
+                   <div class="input-field col s6">
+                    <textarea [style.color]="'rgb(222,222,222)'" [style.width]="'400px'" [style.height]="'400px'" class="materialize-textarea"  name="letra" #letra="ngModel" [(ngModel)]="cancionTrabajada.letra"> </textarea>
                 </div>
                 <input type="hidden"  value="{{cancionTrabajada._id}}" #_id="ngModel" [(ngModel)]="cancionTrabajada._id">
                 
