@@ -8,9 +8,8 @@
                 <li><a class="links" #inicio routerLink="/">Inicio</a></li>
                 <li><a class="links" #login routerLink="/login">Login</a></li>
                 <li><a class="links" #registro routerLink="/registro">Registro</a></li>
-                <li><a class="links" #registroCancion routerLink="/registroCancion">Registro Cancion</a></li>
-                <li [style.display]="this.sesion ? 'block' : 'none'" > <a routerLink="/perfil">
-                    
+                <li><a class="links" #registroCancion routerLink="/admintab">Registro Cancion</a></li>
+                <li> <a routerLink="/perfil">
                     <div class="chip">
                         <img src={{imgUsu}} alt="Icon user">
                         {{user}}

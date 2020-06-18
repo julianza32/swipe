@@ -24,13 +24,15 @@ api.delete('/deleteMusic/:id', CancionControl.eliminarCancion);
 //ruta para obtener una canción en especifico
 api.get('/buscarCancion/:id', CancionControl.buscarCancion);
 //ruta para obtener una canción en especifico
-api.get('/buscarCancionEsp/', CancionControl.buscarCancionEsp);
+api.post('/buscarCancionEsp/', CancionControl.buscarCancionEsp);
 
 api.get('/listarCanciones',cancionControl.ListarCanciones);
 
 api.get('/listarTendencias',cancionControl.ListarCancionesTendencia);
 //ruta para mostrar las canciones disponibles
 api.get('/obtenerCanciones', CancionControl.obtenerCanciones);
+
+api.get('/obtenerCancionesGenero',cancionControl.ListarCancionesGenero)
 
 //Exportar l RUTA
 module.exports=api;

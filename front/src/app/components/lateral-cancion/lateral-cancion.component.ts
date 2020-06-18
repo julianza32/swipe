@@ -13,11 +13,12 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
   // variable con tipo de modelo
   public _Cancion: Cancion;
   //variable tipo arreglo
-  public listaCanciones: any = [];
-  //variable de busqueda
-  public buscar: String;
-  //variable url
-  public url: String;
+    public listaCanciones: any=[];
+    //variable de busqueda
+    public buscar: String;
+     //variable url
+  public url:String;
+  public urlImg:String;
   //variables de imagen y cancion
   public rutaImagenC;
   //variable de tipo cancion
@@ -29,11 +30,11 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
 
 
   constructor(private renderer: Renderer2,
-    private cancionService: CancionService,
-    private _router: Router) {
-    this.url = cancionService.url;
-  }
-
+    private cancionService: CancionService) {
+      this.url = cancionService.url;
+      this.urlImg = cancionService.url+'obtenerImgCancion/';
+    }
+  
 
   public sesion = JSON.parse(localStorage.getItem('sesion'));
   public color = JSON.parse(localStorage.getItem('Tema'));
@@ -91,13 +92,21 @@ export class LateralCancionComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  buscarCancion() {
-
+  buscarCancion(find){
+    
+    let parametro = {busqueda:find};
+    this.cancionService.filtrarCancion(parametro).subscribe(
+      (respuesta:any)=>
+      {
+        console.log(respuesta);
+        this.listaCanciones = respuesta.cancion;
+      }
+    );
   }
-
-  mostrarImag(cancionp) {
-    let rutaImagenC = this.url + 'obtenerImgCancion/' + cancionp.imagenc;
-    document.getElementById('imgCancion').setAttribute('src', rutaImagenC);
+ 
+  mostrarImag(cancionp){
+    //let rutaImagenC= this.url+'obtenerImgCancion/'+cancionp.imagenc;
+    //document.getElementById('imgCancion').setAttribute('src', rutaImagenC );
   }
 
 
