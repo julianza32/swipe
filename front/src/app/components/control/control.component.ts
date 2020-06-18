@@ -11,12 +11,13 @@ export class ControlComponent implements OnInit {
 
   public sesion = JSON.parse(localStorage.getItem('sesion'));
   public color = JSON.parse(localStorage.getItem('Tema'));
-
   //variable tipo arreglo
   public listaCanciones:any[];
-  public cancionA: Cancion;
+  public cancionA= JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
   public urlCancion:String;
   public audioObj= new Audio();
+
+  
   constructor(
     private cancionService: CancionService
   ) {   }
@@ -59,12 +60,12 @@ export class ControlComponent implements OnInit {
   //pasar a la siguiente cancion
   siguiente(){
     //buscar la siguiente cancion
-    let siguiente;
+    let siguiente:Cancion;
      for(var i=0; i<this.listaCanciones.length; i++){
        var titulo=this.listaCanciones[i].titulo;
        
       if (titulo === this.cancionA.titulo ){
-        siguiente=this.listaCanciones[i+1].archivo;
+        siguiente=this.listaCanciones[i+1];
         break;
       }
       //obtener url 
@@ -72,10 +73,29 @@ export class ControlComponent implements OnInit {
       //reproducir la siguiente cancion
       this.reproducirCancion(urlSig);
       //poner en localhost como canción actual
-
+      localStorage.setItem('infoCancion',JSON.stringify(siguiente));
     }
     
   }
-  
+  //pasar a la siguiente cancion
+  atras(){
+    //buscar la siguiente cancion
+    let anterior:Cancion;
+     for(var i=0; i<this.listaCanciones.length; i++){
+       var titulo=this.listaCanciones[i].titulo;
+       
+      if (titulo === this.cancionA.titulo ){
+        anterior=this.listaCanciones[i+1];
+        break;
+      }
+      //obtener url 
+      let urlAnt;
+      //reproducir la siguiente cancion
+      this.reproducirCancion(urlAnt);
+      //poner en localhost como canción actual
+      localStorage.setItem('infoCancion',JSON.stringify(anterior));
+    }
+    
+  }
 
 }
