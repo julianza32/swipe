@@ -14,7 +14,6 @@ export class CancionComponent implements OnInit,AfterViewInit {
     this.url = cancionService.url;
    }
 
-  
 
   ngAfterViewInit(){
     let rutaImagen = this.url + 'obtenerImgCancion/'+this.infoCancion.imagenc;
@@ -28,14 +27,6 @@ export class CancionComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void {
     this.infoCancion;
-
-    let rutaImagen = this.url + 'obtenerImgCancion/'+this.infoCancion.imagenc;
-
-    let y, i;
-    y = document.querySelectorAll(".contenedorF");
-    for (i=0;i<y.length; i++){
-      y[i].style.backgroundImage = 'url('+rutaImagen+')';
-    }
   }
  
 
