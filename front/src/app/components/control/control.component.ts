@@ -13,21 +13,31 @@ export class ControlComponent implements OnInit {
   public color = JSON.parse(localStorage.getItem('Tema'));
   //variable tipo arreglo
   public listaCanciones:any[];
-  public cancionA= JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
+  public cancionA = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
+  public cancionB = this.cancionA.titulo;
   public urlCancion:String;
   public audioObj= new Audio();
 
   
   constructor(
     private cancionService: CancionService
-  ) {   }
+  ) {  
+
+   }
 
   ngOnInit(): void {
     this.sesion;
     this.color;
   }
+
   ngDoCheck()
   {
+
+    this.cancionA = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
+    if(this.cancionA.titulo != this.cancionB)
+    {
+      
+    }
     console.log("Un Cambio");
   }
 
@@ -98,4 +108,8 @@ export class ControlComponent implements OnInit {
     
   }
 
+  prueba()
+  {
+    alert("click");
+  }
 }
