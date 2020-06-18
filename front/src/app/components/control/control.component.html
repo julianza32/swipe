@@ -1,35 +1,31 @@
 <!-- barra control -->
 <div class="contendorBarraControl">
-  <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'" class="row contenedor">
-    <!--  <div class="col s12 m2">
-       <i class="large material-icons">audiotrack</i>
-     </div> -->
-    <!-- <div class="col s12 m2 boton">
-      <i class="large material-icons">autorenew</i>
-    </div> -->
+  <!--  -->
+  <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'" class="contenedor">
+  
     <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
       [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
       [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
       class="boton waves-effect waves-light" (click)="atras()">
-      <i class="large material-icons">fast_rewind</i>
+      <i class="medium material-icons">fast_rewind</i>
     </div>
     <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
       [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
       [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
       class="boton waves-effect waves-light">
-      <i class="large material-icons"(click)="pausa()">pause</i>
+      <i class="medium material-icons"(click)="pausa()">pause</i>
     </div>
     <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
       [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
       [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
       class="boton waves-effect waves-light" (click)="reproducirCancion(this.url+'playMusic/'+this.cancionA.archivo)">
-      <i class="large material-icons">play_arrow</i>
+      <i class="medium material-icons">play_arrow</i>
     </div>
     <div [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
       [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
       [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
       class="boton waves-effect waves-light" (click)="atras()">
-      <i class="large material-icons">fast_forward</i>
+      <i class="medium material-icons">fast_forward</i>
     </div>
     <!-- <div class="col s12 m2 boton">
       <i class="large material-icons">library_music</i>

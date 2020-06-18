@@ -32,7 +32,6 @@ export class ControlComponent implements OnInit {
 
   ngDoCheck()
   {
-
     this.cancionA = JSON.parse(localStorage.getItem('infoCancion'))/* Cancion */;
     if(this.cancionA.titulo != this.cancionB)
     {

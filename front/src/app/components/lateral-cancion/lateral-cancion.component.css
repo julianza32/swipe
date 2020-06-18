@@ -9,17 +9,28 @@
 .collection{
     border: none;
 }
-.collection-item{
+.collection-item.avatar{
     border: none;
     margin-top: 15px;
     margin-bottom: 15px;
+    width: 100%;
+    padding: 0px;
+    padding-left: 0px;
+    display: flex;
+    align-content: center;
 }
 .contenedor{
     display: flex;
+    width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-content: center;
+    align-items: center;
+}
+.imgCancion{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .play{
@@ -32,3 +43,12 @@
     justify-content: center;
     align-content: center; 
 } 
+
+@media only screen and (max-width: 768px) {
+    .contenedor {
+        flex-direction: column;
+    } 
+    .contenido{
+        margin: auto;
+    }
+  }

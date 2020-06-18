@@ -23,21 +23,22 @@
 
   </li> -->
   <ul class="collection" *ngFor="let cancion of listaCanciones">
-
+<!-- 
+     -->
     <li [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
-      [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
-      [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
+    [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
+    [style.boxShadow]="this.color && this.sesion ? color.sombra: '15px 15px 30px #666666, -15px -15px 30px #ffffff'"
       class="collection-item avatar">
-      <div class="row">
-        <div class="col 2">
-          <img id="imgCancion" class="circle responsive-img" [src]="urlImg+cancion.imagenc"
+      <div class="contenedor">
+        <div class="contenido">
+          <img id="imgCancion" class="imgCancion" [src]="urlImg+cancion.imagenc"
             alt="prueba">
         </div>
         <div class="">
           <span>{{cancion.titulo}}</span><br>
           <span>{{cancion.artista}}</span>
         </div>
-        <div class="">
+        <div class="contenido">
           <div class="boton waves-effect waves-light play" 
             [style.background]="this.color && this.sesion ? color.fondo: 'rgb(222, 222, 222)'"
             [style.color]="this.color && this.sesion ? color.fLetra: '#312f3b'"
