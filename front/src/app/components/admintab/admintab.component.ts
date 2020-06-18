@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Cancion } from '../../model/cancion';
 import { CancionService } from '../../services/cancion.service';
+import {UsuarioService} from '../../services/usuario.service';
+import { Router } from '@angular/router';
+import { Usuario } from 'src/app/model/usuario';
 
 
 @Component({
@@ -21,10 +24,11 @@ export class AdmintabComponent implements OnInit {
 
   public rutaImagenC;
   public rutaCancion;
+  public sesion:Usuario ;
   
   public listaCanciones:any; 
 
-  constructor(private cancionService:CancionService) 
+  constructor(private cancionService:CancionService, private _router:Router) 
   {
     this.cancionTrabajada=new Cancion('','',[],'','',0,'','',0,'');
     
@@ -32,13 +36,32 @@ export class AdmintabComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.ListarCanciones();
+    this.sesion = JSON.parse(localStorage.getItem('sesion'));
+    console.log(this.sesion);
+    if(this.sesion!=null)
+    {
+      let admin = false;
+      if(this.sesion.rol === 'administrador'||this.sesion.rol==='Administrador')
+      {
+        admin = true;
+      }
+      console.log(admin);
+      
+      if(!admin)
+      {
+        this._router.navigate(['/']);
+      }
+
+      this.ListarCanciones();
+    }else{
+      this._router.navigate(['/']);
+    }
+
   }
 
   ngDoCheck()
   {
-    console.log(this.rutaImagenC+","+this.cancionTrabajada.imagenc);
+    //console.log(this.rutaImagenC+","+this.cancionTrabajada.imagenc);
     
   }
 

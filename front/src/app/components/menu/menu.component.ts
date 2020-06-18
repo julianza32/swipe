@@ -75,6 +75,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.imgUsu;
+    this.sesion;
   }
 
 

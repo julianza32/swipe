@@ -77,21 +77,27 @@ export class CancionService {
   {
     return this._http.get(this.url+'listarCanciones').pipe(map(res=>res));
   }
+  listarGeneros()
+  {
+    return this._http.get(this.url+'obtenerCancionesGenero').pipe(map(res=>res));
+  }
 
   buscarCancion(id)
   {
     return this._http.get(this.url+'buscarCancion/'+id).pipe(map(res=>res));
-  }
+  } 
 
-  filtrarCancion()
+  filtrarCancion(busqueda)
   {
-
+    let params = JSON.stringify(busqueda);
+    let options = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this._http.post(this.url+'buscarCancionEsp',params,options).pipe(map(res=>res));
   }
    //servicio mostrar canciones disponibles
    obtenerCanciones(){
-    return this._http.get(
-      this.url+'obtenerCanciones'
-    ).pipe(map(res=>res));
+    return this._http.get(this.url+'obtenerCanciones').pipe(map(res=>res));
   }
 
  
