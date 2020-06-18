@@ -45,8 +45,8 @@ export class CancionComponent implements OnInit, AfterViewInit {
     this.artistas.nativeElement.textContent = "Artistas: " + this.infoCancion.artistas;
     this.genero.nativeElement.textContent = "Genero: " + this.infoCancion.genero;
     this.titulo.nativeElement.textContent = "Titulo: " + this.infoCancion.titulo;
-    this.cancionSrc.nativeElement.src = this.rutaCancion;
-    this.cancionSrc.nativeElement.play();
+    //this.cancionSrc.nativeElement.src = this.rutaCancion;
+    //this.cancionSrc.nativeElement.play();
   }
 
 
@@ -81,8 +81,8 @@ export class CancionComponent implements OnInit, AfterViewInit {
       this.artistas.nativeElement.textContent = "Artistas: " + this.infoCancion.artistas;
       this.genero.nativeElement.textContent = "Genero: " + this.infoCancion.genero;
       this.titulo.nativeElement.textContent = "Titulo: " + this.infoCancion.titulo;
-      this.cancionSrc.nativeElement.src = this.rutaCancion;
-      this.cancionSrc.nativeElement.play();
+      //this.cancionSrc.nativeElement.src = this.rutaCancion;
+      //this.cancionSrc.nativeElement.play();
 
     }
   }
